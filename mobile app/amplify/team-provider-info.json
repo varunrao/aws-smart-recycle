@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "smart-recycle-dev-20191111123122-authRole",
+            "UnauthRoleArn": "arn:aws:iam::649615449669:role/smart-recycle-dev-20191111123122-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::649615449669:role/smart-recycle-dev-20191111123122-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "smart-recycle-dev-20191111123122-deployment",
+            "UnauthRoleName": "smart-recycle-dev-20191111123122-unauthRole",
+            "StackName": "smart-recycle-dev-20191111123122",
+            "StackId": "arn:aws:cloudformation:us-west-2:649615449669:stack/smart-recycle-dev-20191111123122/76bc0ee0-04b1-11ea-81e1-02722f0e300c"
+        },
+        "categories": {
+            "auth": {
+                "smartrecycle910bfb77": {}
+            }
+        }
+    }
+}

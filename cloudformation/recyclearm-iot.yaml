@@ -1,0 +1,333 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Parameters:
+    RecycleArmIotTopicPrefix:
+        Type: 'String'
+        Description: 'The MQTT topic prefix that all recycle arm data will be sent to'
+        Default: 'recyclearm'
+    RecycleArmSubscriberEmail:
+        Type: 'String'
+        Description: 'Email address to send error events to.'
+        Default: 'vbhamidi@amazon.com'
+    RecycleArmIotRuleName:
+        Type: 'String'
+        Description: 'IOT Rule name to pass data to Kinesis firehose'
+        Default: 'recyclearm'
+    S3Bucket:
+        Type: 'String'
+        Description: 'S3 bucket to store data'
+        Default: 'reinvent2018-builder-fair-recycle-arm-us-east-1'
+    S3BucketArtifacts:
+        Type: 'String'
+        Description: 'S3 bucket with the project artifacts'
+        Default: 'reinvent2018-builder-fair-recycle-arm-us-east-1'
+    ESInstanceSize:
+      Default: "m3.large.elasticsearch"
+      Description: Instance size for Elasticsearch Instance.
+      Type: 'String'
+      AllowedValues:
+        - "t2.small.elasticsearch"
+        - "t2.medium.elasticsearch"
+        - "m3.large.elasticsearch"
+        - "m3.xlarge.elasticsearch"
+        - "m3.2xlarge.elasticsearch"
+    MyTrustedNetwork:
+      Description: Only connections from this network are allowed to your Elasticsearch Domain or EC2 instances. Enter an IP or CIDR E.g. 1.1.1.1/24 or 10.10.10.10/32
+      Type: 'String'
+      Default: '72.190.74.102/16'
+Resources:
+    RecycleArmLogGroup:
+      Type: "AWS::Logs::LogGroup"
+      Properties:
+        LogGroupName: 'ccbuddy/firehose'
+        RetentionInDays: 7
+    RecycleArmLogStream:
+      Type: "AWS::Logs::LogStream"
+      Properties:
+        LogGroupName: !Ref RecycleArmLogGroup
+        LogStreamName: 'events'
+    KinesisStream:
+        Type: 'AWS::Kinesis::Stream'
+        Properties:
+            Name: RecycleArmStream
+            RetentionPeriodHours: 24
+            ShardCount: 3
+    LambdaRolePolicies:
+        Type: AWS::IAM::Policy
+        Properties:
+            PolicyName: AcmeLambdaAnomaliesRolePolicy
+            PolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    -
+                        Effect: Allow
+                        Action:
+                            - 'logs:CreateLogGroup'
+                            - 'logs:CreateLogStream'
+                            - 'logs:PutLogEvents'
+                        Resource: '*'
+                    -
+                        Effect: Allow
+                        Action:
+                            - 'iot:*'
+                        Resource: '*'
+                    -
+                        Effect: Allow
+                        Action: 
+                            - "kinesis:DescribeStream"
+                            - "kinesis:GetRecords"
+                            - "kinesis:GetShardIterator"
+                        Resource:
+                            Fn::GetAtt:
+                                - "KinesisStream"
+                                - "Arn"
+                    - Effect: Allow
+                      Action:
+                      - es:ESHttpPost
+                      Resource: arn:aws:es:*:*:*
+            Roles: [{ Ref: LambdaRole }]
+    LambdaRole:
+        Type: AWS::IAM::Role
+        Properties:
+            AssumeRolePolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    -
+                        Effect: Allow
+                        Principal:
+                            Service:
+                                - lambda.amazonaws.com
+                        Action:
+                            - sts:AssumeRole
+    LambdaFunction:
+        Type: 'AWS::Lambda::Function'
+        Properties:
+            Handler: 'index.handler'
+            Runtime: nodejs10.x
+            Timeout: '300'
+            Code:
+              S3Bucket: !Join ['', [!Ref S3BucketArtifacts]]
+              S3Key: functions/updateelasticsearch/updateelasticsearch.zip
+            Role:
+                Fn::GetAtt:
+                    - "LambdaRole"
+                    - "Arn"
+            Environment:
+              Variables:
+                ES_ENDPOINT: !ImportValue RecycleArmESDomainEndpoint
+        DependsOn:
+            - LambdaRolePolicies
+            - LambdaRole
+    EventSourceMapping:
+        Type: "AWS::Lambda::EventSourceMapping"
+        Properties:
+            EventSourceArn:
+                Fn::GetAtt:
+                    - "KinesisStream"
+                    - "Arn"
+            FunctionName:
+                Fn::GetAtt:
+                    - "LambdaFunction"
+                    - "Arn"
+            StartingPosition: "TRIM_HORIZON"
+            Enabled: True
+        DependsOn:
+            - KinesisStream
+            - LambdaRolePolicies
+            - LambdaFunction
+
+    IoTEventsKinesisPolicy:
+        Type: AWS::IAM::Policy
+        Properties:
+            PolicyName: EventsKinesisPolicy
+            PolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    -
+                        Effect: Allow
+                        Action:
+                            - kinesis:PutRecord
+                        Resource:
+                            Fn::GetAtt:
+                                - "KinesisStream"
+                                - "Arn"
+            Roles: [{ Ref: IoTEventsKinesisRole }]
+    IoTEventsKinesisRole:
+        Type: AWS::IAM::Role
+        Properties:
+            AssumeRolePolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    -
+                        Effect: Allow
+                        Principal:
+                            Service:
+                            - iot.amazonaws.com
+                        Action:
+                            - sts:AssumeRole
+
+    S3KinesisFirehosePolicy:
+        Type: AWS::IAM::Policy
+        Properties:
+            PolicyName: EventsKinesisFirehosePolicy
+            PolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    -
+                        Effect: Allow
+                        Action:
+                            - s3:GetBucketLocation
+                            - s3:GetObject
+                            - s3:ListBucket
+                            - s3:ListBucketMultipartUploads
+                            - s3:PutObject
+                        Resource:
+                            -
+                                !Sub
+                                    - "arn:aws:s3:::${bucketName}"
+                                    - { bucketName: !Ref S3Bucket }
+                            -
+                                !Sub
+                                    - "arn:aws:s3:::${bucketName}/*"
+                                    - { bucketName: !Ref S3Bucket }
+                    -
+                        Effect: Allow
+                        Action:
+                            - logs:PutLogEvents
+                        Resource:
+                            -
+                                Fn::GetAtt:
+                                    - 'RecycleArmLogGroup'
+                                    - 'Arn'
+            Roles: [{ Ref: S3KinesisFirehoseRole }]
+    S3KinesisFirehoseRole:
+        Type: AWS::IAM::Role
+        Properties:
+            AssumeRolePolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    -
+                        Effect: Allow
+                        Principal:
+                            Service:
+                            - firehose.amazonaws.com
+                        Action:
+                            - sts:AssumeRole
+    S3KinesisFirehose:
+        Type: AWS::KinesisFirehose::DeliveryStream
+        Properties:
+            S3DestinationConfiguration:
+                BucketARN: !Sub
+                              - "arn:aws:s3:::${bucketName}"
+                              - { bucketName: !Ref S3Bucket }
+                BufferingHints:
+                    IntervalInSeconds: 60
+                    SizeInMBs: 1
+                CloudWatchLoggingOptions:
+                    Enabled: true
+                    LogGroupName: !Ref RecycleArmLogGroup
+                    LogStreamName: !Ref RecycleArmLogStream
+                CompressionFormat: UNCOMPRESSED
+                EncryptionConfiguration:
+                    NoEncryptionConfig: NoEncryption
+                Prefix: events
+                RoleARN:
+                    Fn::GetAtt:
+                        - 'S3KinesisFirehoseRole'
+                        - 'Arn'
+        DependsOn:
+            - RecycleArmLogGroup
+            - RecycleArmLogStream
+    IoTFirehoseEventsRolePolicies:
+        Type: AWS::IAM::Policy
+        Properties:
+            PolicyName: AcmeIotEventsRolePolicy
+            PolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    -
+                        Effect: Allow
+                        Action:
+                            - firehose:DescribeDeliveryStream
+                            - firehose:ListDeliveryStreams
+                            - firehose:PutRecord
+                            - firehose:PutRecordBatch
+                            - firehose:UpdateDestination
+                        Resource:
+                            -
+                                !Sub
+                                    - "arn:aws:firehose:${AWS::Region}:${AWS::AccountId}:deliverystream/${delivery_stream_name}"
+                                    - { delivery_stream_name: !Ref S3KinesisFirehose }
+            Roles: [{ Ref: IoTFirehoseEventsRole }]
+    IoTFirehoseEventsRole:
+        Type: AWS::IAM::Role
+        Properties:
+            AssumeRolePolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    -
+                        Effect: Allow
+                        Principal:
+                            Service:
+                            - iot.amazonaws.com
+                        Action:
+                            - sts:AssumeRole
+    IoTElasticSearchRolePolicies:
+        Type: AWS::IAM::Policy
+        Properties:
+            PolicyName: IoTElasticSearchRolePolicy
+            PolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    -
+                      Effect: "Allow"
+                      Action:
+                        - "es:ESHttpPost"
+                      Resource: "arn:aws:es:*:*:*"
+            Roles: [{ Ref: IoTElasticSearchRole }]
+    IoTElasticSearchRole:
+        Type: AWS::IAM::Role
+        Properties:
+            AssumeRolePolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    -
+                        Effect: Allow
+                        Principal:
+                            Service:
+                            - iot.amazonaws.com
+                        Action:
+                            - sts:AssumeRole
+    RecycleArmIotRule:
+        Type: AWS::IoT::TopicRule
+        Properties:
+            RuleName: !Ref RecycleArmIotRuleName
+            TopicRulePayload:
+                Description: "AWS IoT rule that will store the data into S3 using firehose."
+                AwsIotSqlVersion: "2016-03-23"
+                RuleDisabled: false
+                Sql: !Sub "SELECT topic(2) AS recycle_arm, events FROM '${RecycleArmIotTopicPrefix}/+'"
+                Actions:
+                    - Kinesis:
+                        PartitionKey: "${newuuid()}"
+                        StreamName: !Ref KinesisStream
+                        RoleArn:
+                            Fn::GetAtt:
+                                - "IoTEventsKinesisRole"
+                                - "Arn"
+                    - Firehose:
+                        DeliveryStreamName: !Ref S3KinesisFirehose
+                        Separator: "\n"
+                        RoleArn:
+                            Fn::GetAtt:
+                                - "IoTFirehoseEventsRole"
+                                - "Arn"
+Outputs:
+    AcmeKinesisStream:
+        Description: The Kinesis stream that will receive datapoints from AWS Iot.
+        Value: !Ref KinesisStream
+    AcmeLambdaFunction:
+        Description: The Lambda function that reads fro the kinesis stream, detect anomalies and write those to Dynamo DB.
+        Value: !Ref LambdaFunction
+    AcmeS3BucketName:
+        Description: The name of the S3 bucket used for storing the data comming from the rigs
+        Value: !Ref S3Bucket

@@ -1,0 +1,38 @@
+Description: >
+  This template will deploy all resources required for Recycle ARM project
+
+Parameters:
+
+ S3Bucket:
+    Description: S3 bucket where the Cloudformation/Scripts/config files are placed
+    Type: String
+    Default: reinvent2018-builder-fair-recycle-arm
+
+Resources:
+
+  Cognito:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Join ['', ['https://s3.amazonaws.com/', !Ref 'S3Bucket', '-', !Ref 'AWS::Region', '/cloudformation/cognito.yaml']]
+      TimeoutInMinutes: '60'
+
+  ElasticSearch:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: Cognito
+    Properties:
+      TemplateURL: !Join ['', ['https://s3.amazonaws.com/', !Ref 'S3Bucket', '-', !Ref 'AWS::Region', '/cloudformation/recyclearm-elasticsearch.yaml']]
+      TimeoutInMinutes: '60'
+
+  IoTStack:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: ElasticSearch
+    Properties:
+      TemplateURL: !Join ['', ['https://s3.amazonaws.com/', !Ref 'S3Bucket', '-', !Ref 'AWS::Region', '/cloudformation/recyclearm-iot.yaml']]
+      TimeoutInMinutes: '60'
+
+  Sagemaker:
+    Type: AWS::CloudFormation::Stack
+    DependsOn: ElasticSearch
+    Properties:
+      TemplateURL: !Join ['', ['https://s3.amazonaws.com/', !Ref 'S3Bucket', '-', !Ref 'AWS::Region', '/cloudformation/sagemaker.yaml']]
+      TimeoutInMinutes: '60'

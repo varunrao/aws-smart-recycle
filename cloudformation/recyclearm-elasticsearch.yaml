@@ -1,0 +1,109 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: RecycleArm ElasticSearch
+Parameters:
+  ProxyServerEIP:
+    Type: String
+    Default: 72.21.196.67/16
+    Description: 'IP address to get traffic from'
+  ClusterSize:
+    Type: String
+    Default: Small
+    AllowedValues:
+    - Small
+    - Medium
+    - Large
+    Description: 'Amazon ES cluster size: small (2 data nodes), medium (4 data nodes),
+      large (6 data nodes)'
+Conditions:
+  SizeSmall: !Equals [!Ref 'ClusterSize', Small]
+  SizeMedium: !Equals [!Ref 'ClusterSize', Medium]
+  SizeLarge: !Equals [!Ref 'ClusterSize', Large]
+Mappings:
+  RegionMap:
+    us-east-1:
+      AMI: ami-c481fad3
+    us-east-2:
+      AMI: ami-58277d3d
+    us-west-1:
+      AMI: ami-23e8a343
+    us-west-2:
+      AMI: ami-b04e92d0
+    eu-west-1:
+      AMI: ami-d41d58a7
+    eu-central-1:
+      AMI: ami-0044b96f
+    ap-southeast-1:
+      AMI: ami-7243e611
+    ap-northeast-1:
+      AMI: ami-1a15c77b
+    ap-northeast-2:
+      AMI: ami-a04297ce
+    ap-southeast-2:
+      AMI: ami-55d4e436
+  instanceSizing:
+    elasticsearch:
+      Small: m3.large.elasticsearch
+      Medium: r3.2xlarge.elasticsearch
+      Large: r3.8xlarge.elasticsearch
+  MasterSizing:
+    elasticsearch:
+      Small: t2.small.elasticsearch
+      Medium: m3.medium.elasticsearch
+      Large: m3.medium.elasticsearch
+  instanceCount:
+    elasticsearch:
+      Small: '2'
+      Medium: '4'
+      Large: '10'
+  FilterPatternLookup:
+    Common:
+      Pattern: '[host, ident, authuser, date, request, status, bytes, referrer, agent]'
+    CloudTrail:
+      Pattern: ''
+    FlowLogs:
+      Pattern: '[version, account_id, interface_id, srcaddr != "-", dstaddr != "-",
+        srcport != "-", dstport != "-", protocol, packets, bytes, start, end, action,
+        log_status]'
+    Lambda:
+      Pattern: '[timestamp=*Z, request_id="*-*", event]'
+    SpaceDelimited:
+      Pattern: '[]'
+    Other:
+      Pattern: ''
+Resources:
+  RecycleArmESDomain:
+    Type: AWS::Elasticsearch::Domain
+    Properties:
+      DomainName: !Join [ "", ["recyclearm1-", !Ref "AWS::Region"]]
+      ElasticsearchVersion: '2.3'
+      ElasticsearchClusterConfig:
+        DedicatedMasterEnabled: 'true'
+        InstanceCount: !FindInMap [instanceCount, elasticsearch, !Ref 'ClusterSize']
+        ZoneAwarenessEnabled: 'true'
+        InstanceType: !FindInMap [instanceSizing, elasticsearch, !Ref 'ClusterSize']
+        DedicatedMasterType: !FindInMap [MasterSizing, elasticsearch, !Ref 'ClusterSize']
+        DedicatedMasterCount: '3'
+      EBSOptions: !If [SizeSmall, {EBSEnabled: true, Iops: 0, VolumeSize: 50, VolumeType: gp2},
+        !If [SizeMedium, {EBSEnabled: false}, {EBSEnabled: false}]]
+      SnapshotOptions:
+        AutomatedSnapshotStartHour: '1'
+      AccessPolicies:
+        Version: '2012-10-17'
+        Statement:
+        - Action: es:*
+          Principal:
+            AWS: '*'
+          Effect: Allow
+          Resource: '*'
+          Condition:
+            IpAddress:
+              aws:SourceIp:
+              - !Ref 'ProxyServerEIP'
+      AdvancedOptions:
+        rest.action.multi.allow_explicit_index: 'true'
+Outputs:
+  RecycleArmESDomainEndpointOutput:
+    Description: DomainEndpoint of ES cluster
+    Value: !GetAtt "RecycleArmESDomain.DomainEndpoint"
+    Export:
+        Name: RecycleArmESDomainEndpoint
