@@ -112,16 +112,13 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
     sudo reboot
     
     ```
-
 1. You are now ready to set up the Raspberry Pi for AWS IoT Greengrass. First, run the following commands from a local Raspberry Pi terminal window or an SSH terminal window:
-
 ```bash
 
 sudo adduser --system ggc_user
 sudo addgroup --system ggc_group
 
 ```
-
 1. To improve security on the Pi device, enable hardlink and softlink (symlink) protection on the operating system at startup.
 
     1. Navigate to the `98-rpi.conf` file.
