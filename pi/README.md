@@ -3,7 +3,7 @@ Follow the steps below to setup and configure a Raspberry Pi 4 with a SenseHat a
 
 ## Setting up a Raspberry Pi for the first time
 
-If you are setting up a Raspberry Pi for the first time, you must follow all of these steps. Otherwise, you can skip to step 9. However, we recommend that you re-image your Raspberry Pi and follow these instructions.
+If you are setting up a Raspberry Pi for the first time, you must follow all of these steps. Otherwise, you can skip to step 8. However, we recommend that you re-image your Raspberry Pi and follow these instructions.
 
 1. Download and install an SD card formatter such as [SD Memory Card Formatter](https://www.sdcard.org/downloads/formatter_4/index.html) or [PiBakery](http://www.pibakery.org/download.html). Insert the SD card into your computer. Start the program and choose the drive where you have inserted your SD card. You can perform a quick format of the SD card.
 
@@ -105,15 +105,80 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
     sudo apt -y upgrade    
     
     ```
-    
-1. Once the upgrades are done, reboot the Raspberry Pi and reconnect using SSH.
+
+1. Once the upgrades are done, reboot the Raspberry Pi. You will be able to reconnect using SSH in about a minute.
     ```bash
 
     sudo reboot
     
     ```
 
+1. You are now ready to set up the Raspberry Pi for AWS IoT Greengrass. First, run the following commands from a local Raspberry Pi terminal window or an SSH terminal window:
 
+```bash
 
+sudo adduser --system ggc_user
+sudo addgroup --system ggc_group
 
+```
 
+1. To improve security on the Pi device, enable hardlink and softlink (symlink) protection on the operating system at startup.
+
+    1. Navigate to the `98-rpi.conf` file.
+
+    ```bash
+
+    cd /etc/sysctl.d
+    ls
+    
+    ```
+
+    1. Use a text editor (such as Leafpad, GNU nano, or vi) to add the following two lines to the end of the file. You might need to use the sudo command to edit as root (for example, `sudo nano 98-rpi.conf`).
+
+   ```bash
+
+    fs.protected_hardlinks = 1
+    fs.protected_symlinks = 1  
+    
+    ```
+    
+    1. Reboot the Raspberry Pi.
+    ```bash
+
+    sudo reboot
+    
+    ```
+    After about a minute, connect to the Pi using SSH and then run the following command to confirm the change:
+    ```bash
+
+    sudo sysctl -a 2> /dev/null | grep fs.protected
+
+    ```
+
+    You should see `fs.protected_hardlinks = 1` and `fs.protected_symlinks = 1`.
+
+1. Edit your command line boot file to enable and mount memory cgroups. This allows AWS IoT Greengrass to set the memory limit for Lambda functions. Cgroups are also required to run AWS IoT Greengrass in the default [containerization](https://docs.aws.amazon.com/greengrass/latest/developerguide/lambda-group-config.html#lambda-containerization-considerations) mode.
+    1. Navigate to your boot directory.
+    ```bash
+
+    cd /boot/
+
+    ```
+
+    1. Use a text editor to open `cmdline.txt`. Append the following to the end of the existing line, not as a new line. You might need to use the sudo command to edit as root (for example, sudo `nano cmdline.txt`).
+    ``` bash
+
+    cgroup_enable=memory cgroup_memory=1
+
+    ```
+
+   1. Reboot the Raspberry Pi.
+    ```bash
+
+    sudo reboot
+    
+    ```
+
+    Your Raspberry Pi should now be ready for AWS IoT Greengrass.
+
+1. To make sure that you have all required dependencies, download and run the Greengrass dependency checker from the [AWS IoT Greengrass Samples](https://github.com/aws-samples/aws-greengrass-samples) repository on GitHub. These commands unzip and run the dependency checker script in the Downloads directory.
