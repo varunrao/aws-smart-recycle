@@ -9,7 +9,8 @@
 * [SenseHAT](https://www.amazon.com/RASPBERRY-PI-RASPBERRYPI-SENSEHAT-Raspberry-Orientation-Temperature/dp/B014HDG74S/ref=sr_1_5)
 * [MicroSD USB Card Reader](https://www.amazon.com/SanDisk-MobileMate-microSD-Card-Reader/dp/B07G5JV2B5)
 * [MicroHDMI to HDMI Cable for Video](https://www.amazon.com/AmazonBasics-Flexible-Micro-Cable-6-Foot/dp/B07KSDB25X)
-* USB Keyboard/Mouse
+* USB Keyboard
+* USB Mouse
 * HDMI Monitor
 * [Raspberry Pi Case](https://www.amazon.com/gp/product/B07X5Y81C6/ref=ppx_yo_dt_b_asin_title_o02_s00) - Optional
 * [Raspberry Pi Camera Stand](https://www.amazon.com/Makeronics-Acrylic-Holder-Raspberry-Transparent/dp/B07SQL2RNR/ref=sr_1_4) - Optional
