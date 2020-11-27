@@ -64,13 +64,13 @@ After you have received your limit increase, [Launch your Amazon SageMaker noteb
 
 Enter a name for your notebook instance, leave everything else the default except for the volume size. Enter volume size of *50 GB* or more because we'll first download the data to our notebook instance before uploading the data to Amazon S3.
 
-![lab4-sagemaker-create-notebook-1](images/400_train_a_custom_model/lab4-sagemaker-create-notebook-1.png)
+![sagemaker-create-notebook-1](images/sagemaker-create-notebook-1.png)
 
-![lab4-sagemaker-create-notebook-2](images/400_train_a_custom_model/lab4-sagemaker-create-notebook-2.png)
+![sagemaker-create-notebook-2](images/sagemaker-create-notebook-2.png)
 
 If you use Amazon SageMaker for the first time, please create an IAM role by choosing "Create a new role" from the selection list.
 
-![l400-lab0-4](/images/400_train_a_custom_model/lab4-sagemaker-create-notebook-6.png)
+![sagemaker-initialization](/images/sagemaker-create-notebook-6.png)
 
 On the pop-up menu, select **Any S3 bucket** to allow the notebook instance to any S3 buckets in your account. Then, click on "Create role" button on the bottom.
 
@@ -78,7 +78,7 @@ Your notebook instance will take a minute to be configured. Once you see the sta
 
 You should see the page below
 
-![](images/400_advanced/410_build_a_custom_ml/414_training_a_model/notebookupload.jpg)
+![](images/notebookupload.jpg)
 
 Now upload the [aws-smart-recycle-kit-ml-model.ipynb](notebook/aws-smart-recycle-kit-ml-model.ipynb) file you downloaded earlier.
 
