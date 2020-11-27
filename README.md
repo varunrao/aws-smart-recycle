@@ -2,7 +2,7 @@
 
 
 ## Components needed to build Smart Recycle Kit
-[Amazon Shopping List](https://www.amazon.com/hz/wishlist/ls/23FOJ731YT9VW?ref_=wl_share) created with all items below. 
+[Amazon Shopping List](https://www.amazon.com/hz/wishlist/ls/23FOJ731YT9VW?ref_=wl_share) created with items below. 
 
 * [Raspberry Pi 4](https://www.amazon.com/Raspberry-Model-2019-Quad-Bluetooth/dp/B07TC2BK1X/ref=sr_1_1)
 * [Raspberry Pi USB C Power Supply](https://www.amazon.com/CanaKit-Raspberry-Power-Supply-USB-C/dp/B07TYQRXTK/)
