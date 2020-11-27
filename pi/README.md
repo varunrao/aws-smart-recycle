@@ -26,7 +26,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
     
     1. Do you see a black border around your screen?  If so chaeck the box and Press **Next** to save the setting.
 
-        ![screen-image](images/4-0-sreen.png)
+        ![screen-image](images/4-0-screen.png)
     
     1. Select your WiFi Network and Press **Next**.
 
@@ -44,7 +44,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 
         ![restart-image](images/7-0-skip-restart.png)
     
-    1. Open "Raspberry Pi Configuration" by **Clicking** the Raspberry Menu in the upper left corner. The **Select** "Preferences", then **Selecting** Raspberry Pi COnfiguration.
+    1. Open "Raspberry Pi Configuration" by **Clicking** the Raspberry Menu in the upper left corner. The **Select** "Preferences", then **Selecting** Raspberry Pi Configuration.
 
         ![pi-config-image](images/8-0-pi-config.png)
 
@@ -64,7 +64,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 
             ![no-restart-image](images/8-4-reboot-no.png)
     
-    1. Open a terminal window and enter the command "hostname -I" to return the IP Address of the Raspberry Pi.
+    1. Open a terminal window and enter the command "hostname -I" to return the IP Address of the Raspberry Pi.  Make a note of this IP Address as this will be used later to SSH to the Raspberry Pi.
 
         ![hostname-ip-image](images/9-0-hostname.png)
 
