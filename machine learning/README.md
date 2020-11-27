@@ -70,7 +70,7 @@ Enter a name for your notebook instance, leave everything else the default excep
 
 If you use Amazon SageMaker for the first time, please create an IAM role by choosing "Create a new role" from the selection list.
 
-![sagemaker-initialization](doc updateimages/sagemaker-create-notebook-6.png)
+![sagemaker-initialization](images/sagemaker-create-notebook-6.png)
 
 On the pop-up menu, select **Any S3 bucket** to allow the notebook instance to any S3 buckets in your account. Then, click on "Create role" button on the bottom.
 
@@ -78,7 +78,7 @@ Your notebook instance will take a minute to be configured. Once you see the sta
 
 You should see the page below
 
-![](images/notebookupload.jpg)
+![sagemaker notebook](images/notebookupload.jpg)
 
 Now upload the [aws-smart-recycle-kit-ml-model.ipynb](notebook/aws-smart-recycle-kit-ml-model.ipynb) file you downloaded earlier.
 
