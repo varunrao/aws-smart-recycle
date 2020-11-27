@@ -113,46 +113,48 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
     
     ```
 1. You are now ready to set up the Raspberry Pi for AWS IoT Greengrass. First, run the following commands from a local Raspberry Pi terminal window or an SSH terminal window:
-```bash
+    ```bash
 
-sudo adduser --system ggc_user
-sudo addgroup --system ggc_group
+    sudo adduser --system ggc_user
+    sudo addgroup --system ggc_group
 
-```
+    ```
 1. To improve security on the Pi device, enable hardlink and softlink (symlink) protection on the operating system at startup.
 
     1. Navigate to the `98-rpi.conf` file.
 
-    ```bash
+        ```bash
 
-    cd /etc/sysctl.d
-    ls
+        cd /etc/sysctl.d
+        ls
     
-    ```
-
+        ```
+        
     1. Use a text editor (such as Leafpad, GNU nano, or vi) to add the following two lines to the end of the file. You might need to use the sudo command to edit as root (for example, `sudo nano 98-rpi.conf`).
 
-   ```bash
+        ```bash
 
-   fs.protected_hardlinks = 1
-   fs.protected_symlinks = 1  
-    ```
+        fs.protected_hardlinks = 1
+        fs.protected_symlinks = 1  
+        ```
     
     1. Reboot the Raspberry Pi.
-    ```bash
+        ```bash
 
-    sudo reboot
+        sudo reboot
     
-    ```
-    After about a minute, connect to the Pi using SSH and then run the following command to confirm the change:
-    ```bash
+        ```
+        
+        After about a minute, connect to the Pi using SSH and then run the following command to confirm the change:
+    
+        ```bash
 
-    sudo sysctl -a 2> /dev/null | grep fs.protected
+        sudo sysctl -a 2> /dev/null | grep fs.protected
 
-    ```
+        ```
 
-    You should see `fs.protected_hardlinks = 1` and `fs.protected_symlinks = 1`.
-
+        You should see `fs.protected_hardlinks = 1` and `fs.protected_symlinks = 1`.
+        
 1. Edit your command line boot file to enable and mount memory cgroups. This allows AWS IoT Greengrass to set the memory limit for Lambda functions. Cgroups are also required to run AWS IoT Greengrass in the default [containerization](https://docs.aws.amazon.com/greengrass/latest/developerguide/lambda-group-config.html#lambda-containerization-considerations) mode.
     1. Navigate to your boot directory.
     ```bash
