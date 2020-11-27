@@ -18,13 +18,9 @@
 * [Raspberry Pi Camera Stand](https://www.amazon.com/Makeronics-Acrylic-Holder-Raspberry-Transparent/dp/B07SQL2RNR/ref=sr_1_4) - Optional
 
 
-
 ## Create your own Machine Learning Model (Optional)
 Follow the instructions found [here](ml/README.md) to create your own ML model.
 
 
-
-
 ## Smart Recycle Kit Setup
-Follow the instructions found [here](iot/README.md) to setup your Raspberry Pi to serve as a Smart Recycle Kit 
-
+Follow the instructions found [here](iot/README.md) to setup your Raspberry Pi to serve as a Smart Recycle Kit.
