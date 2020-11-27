@@ -92,8 +92,28 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 
        ![putty-image](images/11-1-putty.png)
 
-    1. If a PuTTY security alert is displayed, choose Yes.  The default Raspberry Pi login is `pi` and use the password entered earlier.
+    1. If a PuTTY security alert is displayed, choose Yes.  The default Raspberry Pi login is `pi` and use the password specified earlier.
 
        ![putty-image](images/11-2-putty.png)
+
+1. Using the SSH connection established above, we will upgrade the software on the Raspberry Pi by entering the two commands below.  This step will take some time to complete.
+
+    ```bash
+
+    sudo apt update
+    
+    sudo apt -y upgrade    
+    
+    ```
+    
+1. Once the upgrades are done, reboot the Raspberry Pi and reconnect using SSH.
+    ```bash
+
+    sudo reboot
+    
+    ```
+
+
+
 
 
