@@ -8,9 +8,9 @@ To create a custom image classification model, we need to use a graphics process
 
 1. Open the [AWS Support Center console](https://console.aws.amazon.com/support/home#/case/create).
 
-1. On the **AWS Support Center** page, choose **Create Case** and then choose Service limit increase.
+1. On the **AWS Support Center** page, choose **Create Case** and then choose **Service limit increase**.
 
-1. In the **Case classification** panel under **Limit type**, search for Amazon SageMaker.
+1. In the **Case details** panel under **Limit type**, search for SageMaker.
 
 1. In the **Request** panel, choose the **Region** that you are working in. For **Resource Type**, choose **SageMaker Training**.
 
@@ -18,7 +18,7 @@ To create a custom image classification model, we need to use a graphics process
 
 1. For **New Limit Value**, verify that the value is **1**.
 
-1. In **Case description**, provide a brief explanation of why you need the **Service limit increase**. For example, I need to use this GPU-enabled training job instance to train a deep learning model using TensorFlow. I'll use this model on an AWS DeepLens device.
+1. In **Case description**, provide a brief explanation of why you need the **Service limit increase**. For example, I need to use this GPU-enabled training job instance to train a deep learning model using MXNet.
 
 1. In **Contact options**, provide some details about how you would like to be contacted by the AWS service support team on the status of your **Service limit increase** request.
 
@@ -28,15 +28,6 @@ To create a custom image classification model, we need to use a graphics process
 ## Prepare Training Data
 
 This walkthrough uses an ML algorithm called an ***image classification model***. These models learn to distinguish between different objects by observing many examples over many iterations. This post uses a technique called transfer learning to dramatically reduce the time and data required to train an image classification model. For more information about transfer learning with Amazon SageMaker built-in algorithms, see [How Image Classification Works](https://docs.aws.amazon.com/sagemaker/latest/dg/IC-HowItWorks.html). With transfer learning, you only need a few hundred images of each type of trash. As you add more training samples and vary the viewing angle and lighting for each type of trash, the model takes longer to train but improves its accuracy during inference, when you ask the model to classify trash items it has never seen before.
-
-Before going out and collecting images yourself, consider using the many sources for images that are publicly available. Wewant images that have clear labels (often done by humans) on what’s inside the image. Here are some sources you could look for your use case:
-
-* [AWS Open Data](https://aws.amazon.com/opendata) – Contains a variety of datasets sourced from trusted entities that share and open their datasets for general use. 
-* [AWS Data Exchange](https://aws.amazon.com/data-exchange/) – Contains datasets that are both free and available for a fee or subscription charge. These are very well curated and labeled and therefore involve a charge in most cases. 
-* [GitHub](https://github.com/) – Offers several public repos with image datasets. Make sure you comply with the terms and conditions and reference the original owners when your work is published.
-* [Kaggle](https://www.kaggle.com/datasets) – Has a wide variety of public datasets. Also, they provide some interesting starter Jupyter notebooks. 
-* Non-profit and [government organizations](https://data.gov/) – Often publish data for public use under certain terms. These can be a great source of data.
-* [Amazon SageMaker Ground Truth](https://aws.amazon.com/sagemaker/groundtruth/) – Creates labeled datasets from your images. You can choose between automated labeling (recommended for common objects) or use human labelers or [AWS Marketplace](https://aws.amazon.com/marketplace) offerings for more specific labeling use cases. For more information, see [Build Highly Accurate Training Datasets with Amazon SageMaker Ground Truth](https://aws.amazon.com/getting-started/tutorials/build-training-datasets-amazon-sagemaker-ground-truth/).
 
 A good practice for collecting images is to use pictures at different possible angles and lighting conditions to make the model more robust. The following image is an example of the type of image the model classifies into landfill, recycling, or compost.
 
@@ -63,7 +54,7 @@ This recipe provides a dataset of images labeled under the categories of recycli
 
 This recipe uses Amazon SageMaker Jupyter notebooks as the development environment to train your models. Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations, and narrative text. A full Jupyter notebook has been prepared for you to follow along.
 
-First, download the example notebook: [aws-deeplens-custom-trash-detector.ipynb](/code/trash-sorter/aws-deeplens-custom-trash-detector.ipynb) 
+First, download the example notebook: [aws-smart-recycle-kit-ml-model.ipynb](machine learning/notebook/aws-smart-recycle-kit-ml-model.ipynb) 
 
 Then to create a custom image classification model, you need to use a graphics processing unit (GPU) enabled training job instance. GPUs are excellent at parallelizing the computations required to train a neural network. This tutorial uses a single ml.p2.xlarge instance. In order to access a GPU-enabled training job instance, you must submit a request for a service limit increase to the AWS Support Center. You can follow the [instructions here](/400_advanced/410_trash_sorter/411_setup/) to increase your limit. 
 
