@@ -31,7 +31,7 @@ This walkthrough uses an ML algorithm called an ***image classification model***
 
 A good practice for collecting images is to use pictures at different possible angles and lighting conditions to make the model more robust. The following image is an example of the type of image the model classifies into landfill, recycling, or compost.
 
-![Image Example](images/400_advanced/410_build_a_custom_ml/412_collect_training_data/datasetexample.jpg)
+![Image Example](images/datasetexample.jpg)
 
 When you have your images for each type of trash, separate the images into folders. 
 
