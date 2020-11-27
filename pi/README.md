@@ -26,7 +26,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
     
     1. Do you see a black border around your screen?  If so chaeck the box and Press **Next** to save the setting.
 
-        ![screen-image](images/4-0-screen.png)
+        ![screen-image](images/4-0-setup-screen.png)
     
     1. Select your WiFi Network and Press **Next**.
 
