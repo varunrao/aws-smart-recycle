@@ -3,6 +3,7 @@
 /cr_zip_upload_to_s3.sh
 /.idea
 *.bak
+*.DS_Store
 #amplify
 mobile app/amplify/\#current-cloud-backend
 mobile app/amplify/.config/local-*
