@@ -1,101 +1,236 @@
-#*****************************************************
-#                                                    *
-# Copyright 2018 Amazon.com, Inc. or its affiliates. *
-# All Rights Reserved.                               *
-#                                                    *
-#*****************************************************
-import os
-import json
-import time
-import numpy as np
-import awscam
+import boto3
 import cv2
-import mo
 import greengrasssdk
-from utils import LocalDisplay
+import json
+import logging
+import mxnet as mx
+import numpy as np
+import requests
+import sys
+import tarfile
+import time
+from collections import namedtuple
+from datetime import datetime
+from picamera import PiCamera
+from sense_hat import SenseHat
 
-def lambda_handler(event, context):
-    """Empty entry point to the Lambda function invoked from the edge."""
-    return
+# LOCAL_RESOURCE_DIR is where images taken by camera will be saved
+LOCAL_RESOURCE_DIR = "/tmp"
 
-# Create an IoT client for sending to messages to the cloud.
-client = greengrasssdk.client('iot-data')
-iot_topic = '$aws/things/{}/infer'.format(os.environ['AWS_IOT_THING_NAME'])
+# Default Path to download ML Model that has been created for you to use
+ML_BUCKET_NAME = "reinvent2018-recycle-arm-us-east-1"
+ML_OBJECT_NAME =  "2020/ml-models/model.tar.gz"
 
-# The code below will be used in a challenge lab to integrate DeepLens with a Raspberry Pi
-#pi_topic = 'deeplens/trash/infer'
+# If you have created your own ML model using the sagemaker notebook provided, 
+# the last section will print two lines that can be pasted over the below lines
+#ML_BUCKET_NAME =  "sagemaker-<region>-<acct-number>"
+#ML_OBJECT_NAME =  "smart-recycle-kit/output/model.tar.gz"
 
-INPUT_WIDTH = 224
-INPUT_HEIGHT = 224
+# LOCAL_MODEL_DIR is where the ML Model has been saved
+LOCAL_MODEL_DIR = "/tmp"
+ML_MODEL_FILE = LOCAL_MODEL_DIR + "/" + "model.tar.gz"
 
-def infinite_infer_run():
-    """ Run the DeepLens inference loop frame by frame"""
-    
+# S3 Bucket Name to save images taken 
+BUCKET_NAME = "reinvent2018-recycle-arm-us-east-1"
+
+# MQTT Topic to send messages to IoT Core
+iot_core_topic = 'recycle/info'
+
+#Categories that will be returned by the ML Model
+CATEGORIES = ['Compost', 'Landfill', 'Recycling']
+
+
+# Setup logging to stdout
+logger = logging.getLogger(__name__)
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+
+# Creating a greengrass core sdk client
+gg_client = greengrasssdk.client("iot-data")
+
+# Creating s3 client to download ML Model and to Upload images
+s3 = boto3.client('s3')
+
+
+B = (0, 0, 0)
+G = (0, 255, 0)
+Bl = (0, 0, 255)
+R = (255, 0, 0)
+O = (255, 103, 0)
+
+question_mark = [
+B, B, B, O, O, B, B, B,
+B, B, O, B, B, O, B, B,
+B, B, B, B, B, O, B, B,
+B, B, B, B, O, B, B, B,
+B, B, B, O, B, B, B, B,
+B, B, B, O, B, B, B, B,
+B, B, B, B, B, B, B, B,
+B, B, B, O, B, B, B, B
+]
+
+Compost = [
+B, G, G, G, G, G, G, B,
+B, G, G, G, G, G, G, B,
+B, G, G, B, B, B, B, B,
+B, G, G, B, B, B, B, B,
+B, G, G, B, B, B, B, B,
+B, G, G, B, B, B, B, B,
+B, G, G, G, G, G, G, B,
+B, G, G, G, G, G, G, B
+]
+
+Landfill = [
+B, R, R, B, B, B, B, B,
+B, R, R, B, B, B, B, B,
+B, R, R, B, B, B, B, B,
+B, R, R, B, B, B, B, B,
+B, R, R, B, B, B, B, B,
+B, R, R, B, B, B, B, B,
+B, R, R, R, R, R, R, B,
+B, R, R, R, R, R, R, B
+]
+
+Recycling = [
+B, Bl, Bl, Bl, Bl, Bl, B, B,
+B, Bl, Bl, Bl, Bl, Bl, Bl, B,
+B, Bl, Bl, B, B, Bl, Bl, B,
+B, Bl, Bl, Bl, Bl, Bl, Bl, B,
+B, Bl, Bl, Bl, Bl, Bl, B, B,
+B, Bl, Bl, B, Bl, Bl, B, B,
+B, Bl, Bl, B, B, Bl, Bl, B,
+B, Bl, Bl, B, B, Bl, Bl, B
+]
+
+
+# Configure the PiCamera to take square images. Other
+# resolutions will be scaled to a square when fed into
+# the image-classification model which can result
+# in image distortion.
+camera = PiCamera(resolution=(400,400))
+
+# Initialize SenseHat
+print ("*** Initializing SenseHAT")
+sense = SenseHat()
+
+
+
+def loadModel(modelname):
+        t1 = time.time()
+        modelname = LOCAL_MODEL_DIR + "/" + modelname
+        sym, arg_params, aux_params = mx.model.load_checkpoint(modelname, 0)
+        t2 = time.time()
+        t = 1000*(t2-t1)
+        print("*** Loaded in {} milliseconds".format(t))
+        arg_params['prob_label'] = mx.nd.array([0])
+        mod = mx.mod.Module(symbol=sym)
+        mod.bind(for_training=False, data_shapes=[('data', (1,3,224,224))])
+        mod.set_params(arg_params, aux_params)
+        return mod
+
+
+def prepareNDArray(filename):
+        img = cv2.imread(filename)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img = cv2.resize(img, (224, 224,))
+        img = np.swapaxes(img, 0, 2)
+        img = np.swapaxes(img, 1, 2)
+        img = img[np.newaxis, :]
+        return mx.nd.array(img)
+
+      
+def predict(filename, model, categories, n):
+        array = prepareNDArray(filename)
+        Batch = namedtuple('Batch', ['data'])
+        t1 = time.time()
+        model.forward(Batch([array]))
+        t2 = time.time()
+        t = 1000*(t2-t1)
+        print("*** Predicted in {} millsecond".format(t))
+        prob = model.get_outputs()[0].asnumpy()
+        prob = np.squeeze(prob)
+        sortedprobindex = np.argsort(prob)[::-1]
+        topn = []
+        for i in sortedprobindex[0:n]:
+                topn.append([prob[i], categories[i]])
+        return topn
+
+
+def init(modelname):
+        s3.download_file(ML_BUCKET_NAME, ML_OBJECT_NAME, ML_MODEL_FILE)
+        tar_file = tarfile.open(ML_MODEL_FILE)
+        tar_file.extractall(LOCAL_MODEL_DIR)
+        
+        model = loadModel(modelname)
+        cats = ['Compost', 'Landfill', 'Recycling']
+        return model, cats
+
+
+def capture_and_save_image_as(filename):
+    camera.capture(filename, format='jpeg')
+
+
+def create_image_filename():
+    current_time_millis = int(time.time() * 1000)
+    filename = LOCAL_RESOURCE_DIR + "/" + str(current_time_millis) + ".jpg"
+    return filename
+
+
+def push_to_s3(filename, folder, classify):
     try:
-        # Number of top classes to output
-        num_top_k = 2
-
         
-        model_type = 'classification'
-        model_name = 'image-classification'
-        
-        with open('labels.txt', 'r') as f:
-	        output_map = [l for l in f]
+        img = open(filename, 'rb')
+        now = datetime.now()
 
-        # Create a local display instance that will dump the image bytes to a FIFO
-        # file that the image can be rendered locally.
-        local_display = LocalDisplay('480p')
-        local_display.start()
+        key = str(folder) + "/{}-{}-{}-{}.jpg".format(
+                                                now.year, now.month, now.day,
+                                                classify)
 
-        # Optimize the model
-        error, model_path = mo.optimize(model_name,INPUT_WIDTH,INPUT_HEIGHT)
-        
-        # Load the model onto the GPU.
-        client.publish(topic=iot_topic, payload='Loading model')
-        model = awscam.Model(model_path, {'GPU': 1})
-        client.publish(topic=iot_topic, payload='Model loaded')
-        
-        while True:
-            # Get a frame from the video stream
-            ret, frame = awscam.getLastFrame()
- 
-            # The code below will be used in a challenge lab to integrate DeepLens with a Raspberry Pi
-            #for x in range(20):
-            #    ret, frame = awscam.getLastFrame()
+        response = s3.put_object(ACL='public-read',
+                                 Body=img,
+                                 Bucket=BUCKET_NAME,
+                                 Key=key,
+                                 ContentType= 'image/jpg')
 
-            if not ret:
-                raise Exception('Failed to get frame from the stream')
-            # Resize frame to the same size as the training set.
-            frame_resize = cv2.resize(frame, (INPUT_HEIGHT, INPUT_WIDTH))
-            # Run the images through the inference engine and parse the results using
-            # the parser API, note it is possible to get the output of doInference
-            # and do the parsing manually, but since it is a classification model,
-            # a simple API is provided.
-            parsed_inference_results = model.parseResult(model_type,
-                                                         model.doInference(frame_resize))
-            # Get top k results with highest probabilities
-            top_k = parsed_inference_results[model_type][0:num_top_k]
-            # Add the label of the top result to the frame used by local display.
-            # See https://docs.opencv.org/3.4.1/d6/d6e/group__imgproc__draw.html
-            # for more information about the cv2.putText method.
-            # Method signature: image, text, origin, font face, font scale, color, and thickness
-            output_text = '{} : {:.2f}'.format(output_map[top_k[0]['label']], top_k[0]['prob'])
-            cv2.putText(frame, output_text, (10, 70), cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 165, 20), 8)
-            # Set the next frame in the local display stream.
-            local_display.set_frame_data(frame)
-            # Send the top k results to the IoT console via MQTT
-            cloud_output = {}
-            for obj in top_k:
-                cloud_output[output_map[obj['label']]] = obj['prob']
-            client.publish(topic=iot_topic, payload=json.dumps(cloud_output))
+        gg_client.publish(topic=iot_core_topic, payload=json.dumps({'message': 'Image sent to S3: {}/{}'.format(BUCKET_NAME, key)}))
+
+        return key
+        
+    except Exception as e:
+        msg = "Pushing to S3 failed: " + str(e)
+        print (msg)
+
+# Initialize The Image Classification MXNET model
+ic,c = init("image-classification")
+
+while True:
+    sense.set_pixels(question_mark)
+    print ("*** Waiting for Joystick Event")
+    sense.stick.wait_for_event(emptybuffer=True)
+
+    image_filename = create_image_filename()
+    capture_and_save_image_as(image_filename)
+    print ("*** Picture Taken: {}".format(image_filename))
+
+    print ("*** Image Classification")
+    predicted_result = predict(image_filename,ic,c,1)
+    print ("*** Classified image as {} with a confidence of {}".format(predicted_result[0][1], predicted_result[0][0]))
+    
             
-            # The code below will be used in a challenge lab to integrate DeepLens with a Raspberry Pi
-            # Send the top k results to the Raspberry Pi via MQTT
-            #pi_output = {}
-            #pi_output['object'] = output_map[top_k[0]['label']]
-            #client.publish(topic=pi_topic, payload=json.dumps(pi_output))\
-    except Exception as ex:
-      	print('Error in lambda {}'.format(ex))
-        client.publish(topic=iot_topic, payload='Error in lambda: {}'.format(ex))
+    gg_client.publish(
+        topic=iot_core_topic,
+        payload=json.dumps({'message':'Classified image as {} with a confidence of {}'.format(predicted_result[0][1], str(predicted_result[0][0]))})
+    )
 
-infinite_infer_run()
+    sense.set_pixels(eval(predicted_result[0][1]))
+
+    # Copy image file to s3 with classification and confidence value
+    folder = str("smart-recycle-kit/2020/known/") + str(predicted_result[0][1])
+    classified = str(predicted_result[0][1]) + "-" + str(predicted_result[0][0])
+    push_to_s3(image_filename, folder, classified)
+
+    time.sleep(2)
+
+# This is a dummy handler and will not be invoked
+# Instead the code above will be executed in an infinite loop
+def function_handler(event, context):
+    return
