@@ -14,7 +14,9 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 1. For the first boot, we recommend that you connect the Raspberry Pi to a monitor (through HDMI), a keyboard, and a mouse. Next, connect your Pi to a USB-C power source and the Raspbian operating system should start up.
 
     1. Press **Next** when prompted on the "Welcome to Raspberry Pi" screen
+    
     ![welcome-image](images/1-0-welcome.png)
 
     1. Set Country, Language, and Timezone and Press **Next**
+
     ![country-image](images/2-0-set-country.png)
