@@ -92,3 +92,8 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 
        ![putty-image](images/11-1-putty.png)
 
+    1. If a PuTTY security alert is displayed, choose Yes.  The default Raspberry Pi login is `pi` and use the password entered earlier.
+
+       ![putty-image](images/11-2-putty.png)
+
+
