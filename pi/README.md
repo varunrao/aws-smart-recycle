@@ -23,3 +23,19 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
     1. Change the default 'pi' password and Press **Next**.
 
         ![password-image](images/3-0-set-password.png)
+    
+    1. Do you see a black border around your screen?  If so chaeck the box and Press **Next** to save the setting.
+
+        ![screen-image](images/4-0-sreen.png)
+    
+    1. Select your WiFi Network and Press **Next**.
+
+        ![wifi-image](images/5-0-set-wifi.png)
+    
+    1. Enter your WiFi Network Password and Press **Next**.
+
+        ![wifi-pass-image](images/5-1-set-wifi-pass.png)
+    
+    1. We will update software later, when prompted with Update Software Press **Skip**.
+
+        ![software-image](images/6-0-skip-software.png)
