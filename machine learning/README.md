@@ -92,4 +92,6 @@ As each section runs, it will spit out log output of what it's doing. Sometimes 
 
 After you follow the notebook through to the end, you have a trained model to distinguish between different types of trash.
 
+## Using your model with the Smart Recycle Kit 
+
 In the last cell there will be two lines that can be copied into the Lambda function to use the model you have created on the Raspberry Pi.
