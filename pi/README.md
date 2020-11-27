@@ -201,7 +201,7 @@ Where `more` appears, press the Spacebar key to display another screen of text.
 
 1. In the navigation pane, Expand **Greengrass**, and select **Intro**.
 
-    ![gg-intro-image](images/20-1-ggintro.png)
+    ![gg-intro-image](images/20-1-gg-intro.png)
 
 1. Select **Create a Group**.
 
