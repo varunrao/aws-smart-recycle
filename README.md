@@ -7,7 +7,7 @@
 
 
 ## Create your own Machine Learning Model (Optional)
-Follow the instructions found [here](machine learning/README.md) to create your own ML model.
+Follow the instructions found [here]("machine learning"/README.md) to create your own ML model.
 
 
 
