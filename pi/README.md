@@ -12,6 +12,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 1. Using an SD card-writing tool (such as [Etcher](https://etcher.io/)), follow the tool's instructions to flash the downloaded zip file onto the SD card. Because the operating system image is large, this step might take some time. Eject your SD card from your computer, and insert the microSD card into your Raspberry Pi.
 
 1. For the first boot, we recommend that you connect the Raspberry Pi to a monitor (through HDMI), a keyboard, and a mouse. Next, connect your Pi to a USB-C power source and the Raspbian operating system should start up.
+
     1. When prompted with "Welcome to Raspberry Pi", Press **Next**.
     
         ![welcome-image](images/1-0-welcome.png)
@@ -64,12 +65,20 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 
             ![no-restart-image](images/8-4-reboot-no.png)
     
-    1. Open a terminal window and enter the command "hostname -I" to return the IP Address of the Raspberry Pi.  Make a note of this IP Address as this will be used later to SSH to the Raspberry Pi.
+    1. Open a terminal window and enter the command `hostname -I` to return the IP Address of the Raspberry Pi.  Make a note of this IP Address as this will be used later to SSH to the Raspberry Pi.
 
         ![hostname-ip-image](images/9-0-hostname.png)
 
-    1. Now that all of the initial configuration steps have been performed on the Raspberry Pi, it is time to reboot the Raspberry Pi.  Type "sudo reboot" in the terminal window.
+    1. Now that all of the initial configuration steps have been performed on the Raspberry Pi, it is time to reboot the Raspberry Pi.  Type `sudo reboot` in the terminal window.
 
         ![hostname-ip-image](images/10-0-reboot.png)
 
-  
+1. Once the Raspberry Pi finishes rebooting, we want to connect using SSH to the IP Address returned from the `hostname -I` command.
+
+    1. If you are using MacOS, open a terminal window and enter the following:
+
+    ``
+        `ssh pi@IP-address`
+
+    ``
+
