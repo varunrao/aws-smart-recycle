@@ -129,8 +129,8 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
         ls
     
         ```
-        
-    1. Use a text editor (such as Leafpad, GNU nano, or vi) to add the following two lines to the end of the file. You might need to use the sudo command to edit as root (for example, `sudo nano 98-rpi.conf`).
+
+    1. Use a text editor (such as Leafpad, GNU nano, or vi) to add the following two lines to the end of the file. You might need to use the sudo  command to edit as root (for example, `sudo nano 98-rpi.conf`).
 
         ```bash
 
@@ -154,7 +154,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
         ```
 
         You should see `fs.protected_hardlinks = 1` and `fs.protected_symlinks = 1`.
-        
+
 1. Edit your command line boot file to enable and mount memory cgroups. This allows AWS IoT Greengrass to set the memory limit for Lambda functions. Cgroups are also required to run AWS IoT Greengrass in the default [containerization](https://docs.aws.amazon.com/greengrass/latest/developerguide/lambda-group-config.html#lambda-containerization-considerations) mode.
     1. Navigate to your boot directory.
     ```bash
