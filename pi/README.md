@@ -77,8 +77,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 
     1. If you are using MacOS, open a terminal window and enter the following:
 
-    ``
-        `ssh pi@IP-address`
-
-    ``
+    ```console
+    ssh pi@IP-address
+    ```
 
