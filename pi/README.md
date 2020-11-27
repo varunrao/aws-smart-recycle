@@ -73,14 +73,20 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 
         ![hostname-ip-image](images/10-0-reboot.png)
 
-1. Once the Raspberry Pi finishes rebooting, we want to connect using SSH to the IP Address returned from the `hostname -I` command.
+1. Once the Raspberry Pi finishes rebooting, connect using SSH to the IP Address returned from the `hostname -I` command.
 
     1. If you are using MacOS, open a terminal window and enter the following:
-    
+
 
     ```bash
 
     ssh pi@IP-address
     
     ```
+
+    1. If you are using Windows, you need to install and configure [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html). Expand Connection, choose Data, and make sure that Prompt is selected:
+
+       ![putty-image](images/11-0-putty.png)
+
+1
 
