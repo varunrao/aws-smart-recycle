@@ -36,10 +36,40 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 
         ![wifi-pass-image](images/5-1-set-wifi-pass.png)
     
-    1. We will update software later, when prompted with Update Software Press **Skip**.
+    1. The Raspberry Pi software will be updated in a later step, so when prompted with Update Software Press **Skip**.
 
         ![software-image](images/6-0-skip-software.png)
     
-    1. We will Restart after updating a couple more settings, so Press **Later**.
+    1. There are a few more settings that need to be updated, so Press **Later** when prompted to 'Restart'.
 
         ![restart-image](images/7-0-skip-restart.png)
+    
+    1. Open "Raspberry Pi Configuration" by **Clicking** the Raspberry Menu in the upper left corner. The **Select** "Preferences", then **Selecting** Raspberry Pi COnfiguration.
+
+        ![pi-config-image](images/8-0-pi-config.png)
+
+        1. Select the **Interfaces** tab.
+
+            ![interfaces-image](images/8-1-opened.png)
+
+        1. Select the **Enable** Radio buttons for **Camera** and **SSH** to enable these Interfaces.
+
+            ![select-interfaces-image](images/8-2-interfaces.png)
+
+        1. Press **OK** to save the changes.
+
+            ![save-changes-image](images/8-3-interfaces-complete.png)
+
+        1. Since there is one more piece of information we need to get, press **No** to "Would you like to Reboot Now?".
+
+            ![no-restart-image](images/8-4-reboot-no.png)
+    
+    1. Open a terminal window and enter the command "hostname -I" to return the IP Address of the Raspberry Pi.
+
+        ![hostname-ip-image](images/9-0-hostname.png)
+
+    1. Now that all of the initial configuration steps have been performed on the Raspberry Pi, it is time to reboot the Raspberry Pi.  Type "sudo reboot" in the terminal window.
+
+        ![hostname-ip-image](images/10-0-reboot.png)
+
+  
