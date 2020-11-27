@@ -9,6 +9,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 1. Download the [Raspbian Buster](https://downloads.raspberrypi.org/raspbian/images/raspbian-2020-02-14/) operating system as a zip file.
 1. Using an SD card-writing tool (such as [Etcher](https://etcher.io/)), follow the tool's instructions to flash the downloaded zip file onto the SD card. Because the operating system image is large, this step might take some time. Eject your SD card from your computer, and insert the microSD card into your Raspberry Pi.
 1. For the first boot, we recommend that you connect the Raspberry Pi to a monitor (through HDMI), a keyboard, and a mouse. Next, connect your Pi to a USB-C power source and the Raspbian operating system should start up.
+
     1. Click **Next** when prompted on the "Welcome to Raspberry Pi" screen
     ![welcome-image](images/1-welcome.png)
     1. 
