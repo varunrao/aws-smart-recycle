@@ -204,11 +204,11 @@ Where `more` appears, press the Spacebar key to display another screen of text.
 
 1. If prompted, on the Greengrass needs your permission to access other services dialog box, choose Grant permission to allow the console to create or configure the Greengrass service role for you. You must use a service role to authorize AWS IoT Greengrass to access other AWS services on your behalf. Otherwise, deployments fail.
 
-The AWS account you used to sign in must have permissions to create or manage the IAM role. For more information, see [Greengrass service role](https://docs.aws.amazon.com/greengrass/latest/developerguide/service-role.html).
+    The AWS account you used to sign in must have permissions to create or manage the IAM role. For more information, see [Greengrass service role](https://docs.aws.amazon.com/greengrass/latest/developerguide/service-role.html).
 
 1. On the **Set up your Greengrass group** page, choose **Use default creation** to create a group and an AWS IoT Greengrass core.
 
-Each group requires a core, which is a device that manages local IoT processes. A core needs a certificate and keys that allow it to access AWS IoT and an [AWS IoT policy](https://docs.aws.amazon.com/iot/latest/developerguide/iot-policies.html) that allows it to perform AWS IoT and AWS IoT Greengrass actions. When you choose the Use default creation option, these security resources are created for you and the core is provisioned in the AWS IoT registry.
+    Each group requires a core, which is a device that manages local IoT processes. A core needs a certificate and keys that allow it to access AWS IoT and an [AWS IoT policy](https://docs.aws.amazon.com/iot/latest/developerguide/iot-policies.html) that allows it to perform AWS IoT and AWS IoT Greengrass actions. When you choose the Use default creation option, these security resources are created for you and the core is provisioned in the AWS IoT registry.
 
 1. Enter a name for your group (for example, `recyclekit`), and then choose **Next**.
 
