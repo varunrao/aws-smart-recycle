@@ -164,7 +164,7 @@ sudo addgroup --system ggc_group
 
     ```
 
-    1. Use a text editor to open `cmdline.txt`. Append the following to the end of the existing line, not as a new line. You might need to use the sudo command to edit as root (for example, sudo `nano cmdline.txt`).
+    1. Use a text editor to open `cmdline.txt`. Append the following to the end of the existing line, not as a new line. You might need to use the sudo command to edit as root (for example, `sudo nano cmdline.txt`).
     ``` bash
 
     cgroup_enable=memory cgroup_memory=1
