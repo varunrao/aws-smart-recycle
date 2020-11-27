@@ -216,7 +216,7 @@ Where `more` appears, press the Spacebar key to display another screen of text.
 
 1. On the **Review Group creation** page, choose **Create Group and Core**.
 
-AWS IoT creates an AWS IoT Greengrass group with default security policies and configuration files for you to load onto your device.
+    AWS IoT creates an AWS IoT Greengrass group with default security policies and configuration files for you to load onto your device.
 
 1. Download your core's security resources and configuration file.
 
