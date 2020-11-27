@@ -23,4 +23,4 @@ Follow the instructions found [here](ml/README.md) to create your own ML model.
 
 
 ## Smart Recycle Kit Setup
-Follow the instructions found [here](iot/README.md) to setup your Raspberry Pi to serve as a Smart Recycle Kit.
+Follow the instructions found [here](pi/README.md) to setup your Raspberry Pi to serve as a Smart Recycle Kit.
