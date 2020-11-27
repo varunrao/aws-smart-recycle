@@ -177,7 +177,6 @@ sudo addgroup --system ggc_group
     sudo reboot
     
     ```
-
     Your Raspberry Pi should now be ready for AWS IoT Greengrass.
 
 1. To make sure that you have all required dependencies, reconnect to the Raspberry Pi, download and run the Greengrass dependency checker from the [AWS IoT Greengrass Samples](https://github.com/aws-samples/aws-greengrass-samples) repository on GitHub. These commands unzip and run the dependency checker script in the Downloads directory.
