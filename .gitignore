@@ -1,18 +1,7 @@
 /target/
 /cfnparameters
-/cr_zip_upload_to_s3.sh
 /.idea
+/.DS_Store
 *.bak
-*.DS_Store
-#amplify
-mobile app/amplify/\#current-cloud-backend
-mobile app/amplify/.config/local-*
-mobile app/amplify/mock-data
-mobile app/amplify/backend/amplify-meta.json
-mobile app/amplify/backend/awscloudformation
-mobile app/build/
-mobile app/dist/
-mobile app/node_modules/
-mobile app/aws-exports.js
-mobile app/awsconfiguration.json
+
 
