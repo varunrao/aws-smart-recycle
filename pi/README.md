@@ -226,4 +226,4 @@ Where `more` appears, press the Spacebar key to display another screen of text.
 
 1. After you download the security resources, choose **Finish**.
 
-The group configuration page displays in the console:
+    The group configuration page displays in the console:
