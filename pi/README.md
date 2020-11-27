@@ -1,7 +1,7 @@
 # Rasberry Pi Setup Guide
 Follow the steps below to setup and configure a Raspberry Pi 4 with a SenseHat and Camera for the Smart Recycle Kit
 
-##Setting up a Raspberry Pi for the first time
+## Setting up a Raspberry Pi for the first time
 
 If you are setting up a Raspberry Pi for the first time, you must follow all of these steps. Otherwise, you can skip to step 9. However, we recommend that you re-image your Raspberry Pi and follow these instructions.
 
