@@ -39,3 +39,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
     1. We will update software later, when prompted with Update Software Press **Skip**.
 
         ![software-image](images/6-0-skip-software.png)
+    
+    1. We will Restart after updating a couple more settings, so Press **Later**.
+
+        ![restart-image](images/7-0-skip-restart.png)
