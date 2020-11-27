@@ -191,3 +191,39 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
     ```
 
 Where `more` appears, press the Spacebar key to display another screen of text.
+
+## Configure AWS IoT Greengrass on AWS IoT
+
+1. Sign in to the [AWS Management Console](https://console.aws.amazon.com/) on your computer and open **IoT Core**.
+
+1. In the navigation pane, Expand **Greengrass**, and select **Intro**.
+
+1. Select **Create a Group**.
+
+    An AWS IoT Greengrass [group](https://docs.aws.amazon.com/greengrass/latest/developerguide/what-is-gg.html#gg-group) contains settings and other information about its components, such as devices, Lambda functions, and connectors. A group defines how its components can interact with each other.
+
+1. If prompted, on the Greengrass needs your permission to access other services dialog box, choose Grant permission to allow the console to create or configure the Greengrass service role for you. You must use a service role to authorize AWS IoT Greengrass to access other AWS services on your behalf. Otherwise, deployments fail.
+
+The AWS account you used to sign in must have permissions to create or manage the IAM role. For more information, see [Greengrass service role](https://docs.aws.amazon.com/greengrass/latest/developerguide/service-role.html).
+
+1. On the **Set up your Greengrass group** page, choose **Use default creation** to create a group and an AWS IoT Greengrass core.
+
+Each group requires a core, which is a device that manages local IoT processes. A core needs a certificate and keys that allow it to access AWS IoT and an [AWS IoT policy](https://docs.aws.amazon.com/iot/latest/developerguide/iot-policies.html) that allows it to perform AWS IoT and AWS IoT Greengrass actions. When you choose the Use default creation option, these security resources are created for you and the core is provisioned in the AWS IoT registry.
+
+1. Enter a name for your group (for example, `recyclekit`), and then choose **Next**.
+
+1. Use the default name for the AWS IoT Greengrass core, and then choose **Next**.
+
+1. On the **Review Group creation** page, choose **Create Group and Core**.
+
+AWS IoT creates an AWS IoT Greengrass group with default security policies and configuration files for you to load onto your device.
+
+1. Download your core's security resources and configuration file.
+
+    1. On the confirmation page, under **Download and store your Core's security resources**, choose **Download these resources as a tar.gz**. The name of your downloaded tar.gz file starts with a 10-digit hash that's also used for the certificate and key file names.
+
+    1. Skip **Choose a root CA** for now. The next section includes a step where you download the root CA certificate.
+
+1. After you download the security resources, choose **Finish**.
+
+The group configuration page displays in the console:
