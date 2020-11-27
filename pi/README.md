@@ -247,6 +247,6 @@ Where `more` appears, press the Spacebar key to display another screen of text.
 
     ![gg-dnload-image](images/20-8-gg-group.png)
 
-1. From the [AWS IoT Greengrass Core software](https://docs.aws.amazon.com/greengrass/latest/developerguide/what-is-gg.html#gg-core-download-tab) section in this guide, download the appropriate software installation package.  The image below show the image for the Raspberry Pi 4.
+1. From the [AWS IoT Greengrass Core software](https://docs.aws.amazon.com/greengrass/latest/developerguide/what-is-gg.html#gg-core-download-tab) section in this guide, download the appropriate software installation package.  The image below shows the link for the Raspberry Pi 4.
 
 ![gg-dnload-image](images/20-9-gg-download.png)
