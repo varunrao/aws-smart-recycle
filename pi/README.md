@@ -137,8 +137,8 @@ sudo addgroup --system ggc_group
 
    ```bash
 
-    fs.protected_hardlinks = 1
-    fs.protected_symlinks = 1  
+   fs.protected_hardlinks = 1
+   fs.protected_symlinks = 1  
     
     ```
     
