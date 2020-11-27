@@ -88,5 +88,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 
        ![putty-image](images/11-0-putty.png)
 
-1
+    1. Next, choose **Session**, enter the IP address of the Raspberry Pi, and then choose **Open** using default settings.
+
+       ![putty-image](images/11-1-putty.png)
 
