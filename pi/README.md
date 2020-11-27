@@ -139,7 +139,6 @@ sudo addgroup --system ggc_group
 
    fs.protected_hardlinks = 1
    fs.protected_symlinks = 1  
-    
     ```
     
     1. Reboot the Raspberry Pi.
