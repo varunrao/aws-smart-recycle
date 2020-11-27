@@ -44,7 +44,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
 
         ![restart-image](images/7-0-skip-restart.png)
     
-    1. Open "Raspberry Pi Configuration" by **Clicking** the Raspberry Menu in the upper left corner. The **Select** "Preferences", then **Selecting** Raspberry Pi Configuration.
+    1. Open "Raspberry Pi Configuration" by **Selecting** the Raspberry Menu Button in the upper left corner. The **Select** "Preferences", then **Selecting** Raspberry Pi Configuration.
 
         ![pi-config-image](images/8-0-pi-config.png)
 
