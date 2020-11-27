@@ -19,3 +19,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
     1. Set Country, Language, and Timezone and Press **Next**.
 
         ![country-image](images/2-0-set-country.png)
+    
+    1. Change the default 'pi' password and Press **Next**.
+
+        ![password-image](images/3-0-set-password.png)
