@@ -401,5 +401,122 @@ In the previous steps, you downloaded two files to your computer:
     sudo systemctl restart greengrass
     ```
 
+1. Due to the interaction of the SenseHAT with the Raspberry Pi, the Raspberry Pi boot configuration needs to be updated so the Raspberry Pi will boot even if a monitor is not plugged into the HDMI port.
 
+    ```bash
+    sudo nano /boot/config.txt
+    ```
+
+    The `#` needs to be removed from the beginning of the configuration line `#hdmi_force_hotplug=1` to make the line `hdmi_force_hotplug=1`.  Save the file after updating and exit the editor.
+
+## Install MXNet, OpenCV, boto3, and dependencies
+
+1. Connect to the Raspberry Pi either through SSH or terminal window
+
+1. Install the dependencies required for MXNet using commands below
+
+    ```bash
+    cd ~
+    sudo apt-get update
+    
+    sudo apt-get install -y \
+    apt-transport-https \
+    build-essential \
+    ca-certificates \
+    cmake \
+    curl \
+    git \
+    libatlas-base-dev \
+    libcurl4-openssl-dev \
+    libjemalloc-dev \
+    liblapack-dev \
+    libgfortran3 \
+    libopenblas-dev \
+    libopencv-dev \
+    libzmq3-dev \
+    ninja-build \
+    python-dev \
+    python-pip \
+    software-properties-common \
+    sudo \
+    unzip \
+    virtualenv \
+    wget \
+    libjpeg-dev \
+    libtiff-dev \
+    libgif-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libswscale-dev \
+    libgtk2.0-dev \
+    libxvidcore-dev \
+    libx264-dev \
+    libgtk-3-dev \
+    libtbb2 libtbb-dev \
+    libdc1394-22-dev \
+    libv4l-dev \
+    libopenblas-dev \
+    libatlas-base-dev \
+    libblas-dev \
+    libjasper-dev \
+    liblapack-dev \
+    libhdf5-dev \
+    libqtgui4 \
+    libqt4-test \
+    libcanberra-gtk*
+    ```
+
+1. Download and Install MXNet 1.5.0 Python wheel using commands below
+
+    ```bash
+    cd ~
+    wget https://mxnet-public.s3.amazonaws.com/install/raspbian/mxnet-1.5.0-py2.py3-none-any.whl
+    sudo pip3 install mxnet-1.5.0-py2.py3-none-any.whl
+    ```
+
+1. Upgrade numpy after MXNet installs an older version
+
+    ```bash
+    sudo pip3 install --upgrade numpy
+    ```
+
+1. Install the dependencies required for OpenCV using commands below
+
+    ```bash
+    sudo apt-get -y install \
+    libjpeg-dev \
+    libtiff-dev \
+    libgif-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libswscale-dev \
+    libgtk2.0-dev \
+    libxvidcore-dev \
+    libx264-dev \
+    libgtk-3-dev \
+    libtbb2 libtbb-dev \
+    libdc1394-22-dev \
+    libv4l-dev \
+    libopenblas-dev \
+    libatlas-base-dev \
+    libblas-dev \
+    libjasper-dev \
+    liblapack-dev \
+    libhdf5-dev \
+    libqtgui4 \
+    libqt4-test \
+    libcanberra-gtk*
+    ```
+
+1. Install OpenCV
+
+    ```bash
+    sudo pip3 install opencv-python==3.4.6.27
+    ```
+
+1. Install boto3 to provide access to AWS in the Lambda function
+
+    ```bash
+    sudo pip3 install boto3
+    ```
 
