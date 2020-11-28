@@ -364,7 +364,12 @@ In the previous steps, you downloaded two files to your computer:
     ```
 
 1. The Greengrass config file `/greengrass/config/config.json` needs to be updated so that the Lambda function can be run as `root`.  The added permissions are needed to allow the Lambda function permissions to control the SenseHAT.  The `config.json` has a `"runtime"` needs a key/value pair added (`"allowFunctionsToRunAsRoot" : "yes",`).  
-    
+
+   ```bash
+    sudo nano /greengrass/config/config.json
+    ``` 
+   
+   
     ```json
     {
     "coreThing" : {
