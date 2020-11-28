@@ -497,3 +497,6 @@ In the previous steps, you downloaded two files to your computer:
     sudo pip3 install boto3
     ```
 
+## Create Lambda function and deploy to Greengrass Core
+
+1. 
