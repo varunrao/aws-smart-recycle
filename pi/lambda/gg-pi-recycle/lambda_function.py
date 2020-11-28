@@ -20,9 +20,7 @@ LOCAL_RESOURCE_DIR = "/tmp"
 # Default Path to download ML Model that has been created for you to use
 ML_BUCKET_NAME = "reinvent2018-recycle-arm-us-east-1"
 ML_OBJECT_NAME =  "2020/ml-models/model.tar.gz"
-
-# If you have created your own ML model using the sagemaker notebook provided, 
-# the last section will print two lines that can be pasted over the below lines
+# If you have created your own ML model using the sagemaker notebook provided, the last section will print two lines that can be pasted over the below lines
 #ML_BUCKET_NAME =  "sagemaker-<region>-<acct-number>"
 #ML_OBJECT_NAME =  "smart-recycle-kit/output/model.tar.gz"
 
@@ -198,6 +196,8 @@ def push_to_s3(filename, folder, classify):
     except Exception as e:
         msg = "Pushing to S3 failed: " + str(e)
         print (msg)
+
+
 
 # Initialize The Image Classification MXNET model
 ic,c = init("image-classification")
