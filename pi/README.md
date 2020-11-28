@@ -337,7 +337,7 @@ In the previous steps, you downloaded two files to your computer:
     sudo nano greengrass.service
     ```
 
-    Paste below text to this blank file.
+    Paste the below text into this blank file.
     
     ```bash
     [Unit]
