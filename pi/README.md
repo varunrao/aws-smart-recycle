@@ -247,6 +247,17 @@ Where `more` appears, press the Spacebar key to display another screen of text.
 
     ![gg-dnload-image](images/20-8-gg-group.png)
 
-1. From the [AWS IoT Greengrass Core software](https://docs.aws.amazon.com/greengrass/latest/developerguide/what-is-gg.html#gg-core-download-tab) section in this guide, download the appropriate software installation package.  The image below shows the link for the Raspberry Pi 4.
+1. From the [AWS IoT Greengrass Core software](https://docs.aws.amazon.com/greengrass/latest/developerguide/what-is-gg.html#gg-core-download-tab) section in this guide, download the appropriate software installation package.  The image below shows the link for the Raspberry Pi 4. Click on this **Download** link and save the package.
 
 ![gg-dnload-image](images/20-9-gg-download.png)
+
+
+## Start AWS IoT Greengrass on the Core Device
+
+In the previous steps, you downloaded two files to your computer:
+
+- hash-setup.tar.gz (for example, c6973960cc-setup.tar.gz). This compressed file contains the core device certificate and cryptographic keys that enable secure communications between AWS IoT Core and the config.json file that contains configuration information specific to your Greengrass core. This information includes the location of certificate files and the AWS IoT Core endpoint.
+
+- greengrass-OS-architecture-1.11.0.tar.gz. This compressed file contains the AWS IoT Greengrass Core software that runs on the core device.
+
+
