@@ -371,8 +371,8 @@ In the previous steps, you downloaded two files to your computer:
         ...
     },
     "runtime" : {
+        "allowFunctionsToRunAsRoot" : "yes",
         ...
-        "allowFunctionsToRunAsRoot" : "yes"
     },
     ...
     }
