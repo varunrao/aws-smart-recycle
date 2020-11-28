@@ -282,7 +282,7 @@ In the previous steps, you downloaded two files to your computer:
         pscp -pw Pi-password hash-setup.tar.gz pi@IP-address:/home/pi
         ```
 
-1. Open a terminal on the Greengrass core device and navigate to the folder that contains the compressed files (for example, cd /home/pi).
+1. Open a terminal on the Greengrass core device and navigate to the folder that contains the compressed files (for example, `cd /home/pi`).
     ```bash
     cd path-to-downloaded-files
     ```
@@ -291,7 +291,7 @@ In the previous steps, you downloaded two files to your computer:
 
     The first command creates the /greengrass directory in the root folder of the core device (through the -C / argument).
 
-    The second command copies the core device certificate and keys into the /greengrass/certs folder and the config.json file into the 
+    The second command copies the core device certificate and keys into the /greengrass/certs folder and the `config.json` file into the 
     /greengrass/config folder (through the -C /greengrass argument).
 
     ```bash
@@ -301,14 +301,14 @@ In the previous steps, you downloaded two files to your computer:
 
 1. Make sure that your core device is connected to the internet. Then, download the root CA certificate to the /greengrass/certs folder on the device.
 
-    For example, run the following commands to download the Amazon Root CA 1 certificate and rename it to root.ca.pem. This is the file name registered in the config.json that you downloaded from the console.
+    For example, run the following commands to download the Amazon Root CA 1 certificate and rename it to root.ca.pem. This is the file name registered in the `config.json` that you downloaded from the console.
 
     ```bash
     cd /greengrass/certs/
     sudo wget -O root.ca.pem https://www.amazontrust.com/repository/AmazonRootCA1.pem
     ```
 
-    You can run the following command to confirm that root.ca.pem is not empty. If the file is empty, check the wget URL and try again.
+    You can run the following command to confirm that `root.ca.pem` is not empty. If the file is empty, check the wget URL and try again.
 
     ```bash
     cat root.ca.pem
