@@ -413,7 +413,7 @@ In the previous steps, you downloaded two files to your computer:
 
 1. Connect to the Raspberry Pi either through SSH or terminal window
 
-1. Install the dependencies required for MXNet using commands below
+1. Install the dependencies required for MXNet and OpenCV using the commands below
 
     ```bash
     cd ~
@@ -478,34 +478,6 @@ In the previous steps, you downloaded two files to your computer:
 
     ```bash
     sudo pip3 install --upgrade numpy
-    ```
-
-1. Install the dependencies required for OpenCV using commands below
-
-    ```bash
-    sudo apt-get -y install \
-    libjpeg-dev \
-    libtiff-dev \
-    libgif-dev \
-    libavcodec-dev \
-    libavformat-dev \
-    libswscale-dev \
-    libgtk2.0-dev \
-    libxvidcore-dev \
-    libx264-dev \
-    libgtk-3-dev \
-    libtbb2 libtbb-dev \
-    libdc1394-22-dev \
-    libv4l-dev \
-    libopenblas-dev \
-    libatlas-base-dev \
-    libblas-dev \
-    libjasper-dev \
-    liblapack-dev \
-    libhdf5-dev \
-    libqtgui4 \
-    libqt4-test \
-    libcanberra-gtk*
     ```
 
 1. Install OpenCV
