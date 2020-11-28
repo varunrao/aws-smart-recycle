@@ -256,9 +256,9 @@ Where `more` appears, press the Spacebar key to display another screen of text.
 
 In the previous steps, you downloaded two files to your computer:
 
-- `hash-setup.tar.gz` (for example, c6973960cc-setup.tar.gz). This compressed file contains the core device certificate and cryptographic keys that enable secure communications between AWS IoT Core and the config.json file that contains configuration information specific to your Greengrass core. This information includes the location of certificate files and the AWS IoT Core endpoint.
+- `hash-setup.tar.gz` (for example, `c6973960cc-setup.tar.gz`). This compressed file contains the core device certificate and cryptographic keys that enable secure communications between AWS IoT Core and the config.json file that contains configuration information specific to your Greengrass core. This information includes the location of certificate files and the AWS IoT Core endpoint.
 
-- `greengrass-OS-architecture-1.11.0.tar.gz` (for Raspberry Pi 4, greengrass-linux-armv7l-1.11.0.tar.gz). This compressed file contains the AWS IoT Greengrass Core software that runs on the core device.
+- `greengrass-OS-architecture-1.11.0.tar.gz` (for Raspberry Pi 4, `greengrass-linux-armv7l-1.11.0.tar.gz`). This compressed file contains the AWS IoT Greengrass Core software that runs on the core device.
 
 1. Transfer the two compressed files from your computer to the Greengrass core device. Choose your operating system for steps that show how to transfer files to your Raspberry Pi device. 
 
