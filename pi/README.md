@@ -83,7 +83,7 @@ If you are setting up a Raspberry Pi for the first time, you must follow all of 
         
         ```
 
-    1. If you are using Windows, you need to install and configure [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html). Expand Connection, choose Data, and make sure that Prompt is selected:
+    1. If you are using Windows, you need to install and configure [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) using the MSI to install all utilities since we will use pscp later to copy files to the Raspberry Pi. Expand Connection, choose Data, and make sure that Prompt is selected:
 
        ![putty-image](images/11-0-putty.png)
 
@@ -256,8 +256,150 @@ Where `more` appears, press the Spacebar key to display another screen of text.
 
 In the previous steps, you downloaded two files to your computer:
 
-- hash-setup.tar.gz (for example, c6973960cc-setup.tar.gz). This compressed file contains the core device certificate and cryptographic keys that enable secure communications between AWS IoT Core and the config.json file that contains configuration information specific to your Greengrass core. This information includes the location of certificate files and the AWS IoT Core endpoint.
+- `hash-setup.tar.gz` (for example, c6973960cc-setup.tar.gz). This compressed file contains the core device certificate and cryptographic keys that enable secure communications between AWS IoT Core and the config.json file that contains configuration information specific to your Greengrass core. This information includes the location of certificate files and the AWS IoT Core endpoint.
 
-- greengrass-OS-architecture-1.11.0.tar.gz. This compressed file contains the AWS IoT Greengrass Core software that runs on the core device.
+- `greengrass-OS-architecture-1.11.0.tar.gz` (for Raspberry Pi 4, greengrass-linux-armv7l-1.11.0.tar.gz). This compressed file contains the AWS IoT Greengrass Core software that runs on the core device.
+
+1. Transfer the two compressed files from your computer to the Greengrass core device. Choose your operating system for steps that show how to transfer files to your Raspberry Pi device. 
+
+    ### MacOS
+    - To transfer the compressed files from your Mac to a Raspberry Pi core device, open a Terminal window on your computer and run the following commands. The `path-to-downloaded-files` is typically `~/Downloads`.
+
+        ```bash
+        cd path-to-downloaded-files
+        scp greengrass-OS-architecture-1.11.0.tar.gz pi@IP-address:/home/pi
+        scp hash-setup.tar.gz pi@IP-address:/home/pi
+        ```
+
+    ### Windows 
+    - To transfer the compressed files from your computer to a Raspberry Pi core device, use a tool such the [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) `pscp` utility that was installed earlier. If you did not install `pscp`, please install it now. 
+    
+        To use the pscp command, open a Command Prompt window on your computer and run the following:
+
+        ```bash
+        cd path-to-downloaded-files
+        pscp -pw Pi-password greengrass-OS-architecture-1.11.0.tar.gz pi@IP-address:/home/pi
+        pscp -pw Pi-password hash-setup.tar.gz pi@IP-address:/home/pi
+        ```
+
+1. Open a terminal on the Greengrass core device and navigate to the folder that contains the compressed files (for example, cd /home/pi).
+    ```bash
+    cd path-to-downloaded-files
+    ```
+
+1. Install the AWS IoT Greengrass Core software and the security resources.
+
+    The first command creates the /greengrass directory in the root folder of the core device (through the -C / argument).
+
+    The second command copies the core device certificate and keys into the /greengrass/certs folder and the config.json file into the 
+    /greengrass/config folder (through the -C /greengrass argument).
+
+    ```bash
+    sudo tar -xzvf greengrass-OS-architecture-1.11.0.tar.gz -C /
+    sudo tar -xzvf hash-setup.tar.gz -C /greengrass
+    ```
+
+1. Make sure that your core device is connected to the internet. Then, download the root CA certificate to the /greengrass/certs folder on the device.
+
+    For example, run the following commands to download the Amazon Root CA 1 certificate and rename it to root.ca.pem. This is the file name registered in the config.json that you downloaded from the console.
+
+    ```bash
+    cd /greengrass/certs/
+    sudo wget -O root.ca.pem https://www.amazontrust.com/repository/AmazonRootCA1.pem
+    ```
+
+    You can run the following command to confirm that root.ca.pem is not empty. If the file is empty, check the wget URL and try again.
+
+    ```bash
+    cat root.ca.pem
+    ```
+
+1. Start AWS IoT Greengrass on your core device.
+
+    ```bash
+    cd /greengrass/ggc/core/
+    sudo ./greengrassd start
+    ```
+
+    You should see a Greengrass successfully started message. Make a note of the PID.
+
+    You can run the following command to confirm that the AWS IoT Greengrass Core software (Greengrass daemon) is functioning. Replace `PID-number` with your PID:
+
+    ```bash
+    ps aux | grep PID-number
+    ```
+
+    You should see an entry for the PID with a path to the running Greengrass daemon (for example, /greengrass/ggc/packages/1.11.0/bin/daemon).
+
+1. Add greengrass as a Service, so that it starts automatically when the Raspberry Pi reboots
+    ```bash
+    cd /etc/systemd/system/
+    sudo nano greengrass.service
+    ```
+
+    Paste below text to this blank file.
+    
+    ```bash
+    [Unit]
+    Description=Greengrass Daemon
+
+    [Service]
+    Type=forking
+    PIDFile=/var/run/greengrassd.pid
+    Restart=on-failure
+    ExecStart=/greengrass/ggc/core/greengrassd start
+    ExecReload=/greengrass/ggc/core/greengrassd restart
+    ExecStop=/greengrass/ggc/core/greengrassd stop
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+
+    Save file and Exit editor.
+
+    ```bash
+    sudo chmod u+rwx /etc/systemd/system/greengrass.service
+    sudo systemctl enable greengrass
+    sudo systemctl start greengrass
+    ```
+
+1. The Greengrass config file `/greengrass/config/config.json` needs to be updated so that the Lambda function can be run as `root`.  The added permissions are needed to allow the Lambda function permissions to control the SenseHAT.  The `config.json` has a `"runtime"` needs a key/value pair added (`"allowFunctionsToRunAsRoot" : "yes",`).  
+    
+    ```json
+    {
+    "coreThing" : {
+        ...
+    },
+    "runtime" : {
+        ...
+        "allowFunctionsToRunAsRoot" : "yes"
+    },
+    ...
+    }
+    ```
+
+    After the update the `"runtime"` section should look like the below:
+
+    ```json
+    {
+    "coreThing" : {
+        ...
+    },
+    "runtime" : {
+        "allowFunctionsToRunAsRoot" : "yes",
+        "cgroup" : {
+        "useSystemd" : "yes"
+        }
+    },
+    ...
+    }
+    ```
+
+    After this update, restart the `greengrass` service
+
+    ```bash
+    sudo systemctl restart greengrass
+    ```
+
 
 
