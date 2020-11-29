@@ -491,7 +491,7 @@ In the previous steps, you downloaded two files to your computer:
     sudo pip3 install opencv-python==3.4.6.27
     ```
 
-1. Install boto3 to provide access to AWS in the Lambda function
+1. Install latest Boto3 release via pip to provide access to AWS services from the Python Lambda function created in the next steps
 
     ```bash
     sudo pip3 install boto3
@@ -500,3 +500,10 @@ In the previous steps, you downloaded two files to your computer:
 ## Create Lambda function and deploy to Greengrass Core
 
 1. 
+
+
+
+## Create IAM Policy and Role for the GreenGrass Group
+
+1. 
+

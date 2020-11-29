@@ -14,22 +14,29 @@ from datetime import datetime
 from picamera import PiCamera
 from sense_hat import SenseHat
 
+#########################################################################################
+# Default Path to download ML Model that has been created for you to use,
+# These can be commented out if you build your own model and paste that information below
+ML_BUCKET_NAME = "reinvent2018-recycle-arm-us-east-1"
+ML_OBJECT_NAME = "2020/ml-models/model.tar.gz"
+
+# If you have created your own ML model using the Sagemaker notebook provided, 
+# the last section will print two lines that can be pasted over the following two lines
+#ML_BUCKET_NAME =  "sagemaker-<region>-<acct_numeber>"
+#ML_OBJECT_NAME =  "smart-recycle-kit/output/<model_directory>/output/model.tar.gz"
+
+# S3 Bucket Name to save images taken
+# If a S3 Bucket is not specified below, captured images will not be copied to S3
+# For example, you can use the Sagemaker Bucket you pasted from the notebook 
+BUCKET_NAME = ""
+#########################################################################################
+
 # LOCAL_RESOURCE_DIR is where images taken by camera will be saved
 LOCAL_RESOURCE_DIR = "/tmp"
-
-# Default Path to download ML Model that has been created for you to use
-ML_BUCKET_NAME = "reinvent2018-recycle-arm-us-east-1"
-ML_OBJECT_NAME =  "2020/ml-models/model.tar.gz"
-# If you have created your own ML model using the sagemaker notebook provided, the last section will print two lines that can be pasted over the below lines
-#ML_BUCKET_NAME =  "sagemaker-<region>-<acct-number>"
-#ML_OBJECT_NAME =  "smart-recycle-kit/output/model.tar.gz"
 
 # LOCAL_MODEL_DIR is where the ML Model has been saved
 LOCAL_MODEL_DIR = "/tmp"
 ML_MODEL_FILE = LOCAL_MODEL_DIR + "/" + "model.tar.gz"
-
-# S3 Bucket Name to save images taken 
-BUCKET_NAME = "reinvent2018-recycle-arm-us-east-1"
 
 # MQTT Topic to send messages to IoT Core
 iot_core_topic = 'recycle/info'
@@ -183,14 +190,16 @@ def push_to_s3(filename, folder, classify):
                                                 now.year, now.month, now.day,
                                                 classify)
 
-        response = s3.put_object(ACL='public-read',
+        response = s3.put_object(ACL='private',
                                  Body=img,
                                  Bucket=BUCKET_NAME,
                                  Key=key,
                                  ContentType= 'image/jpg')
 
-        gg_client.publish(topic=iot_core_topic, payload=json.dumps({'message': 'Image sent to S3: {}/{}'.format(BUCKET_NAME, key)}))
+        print ('*** Image copied to S3: {}/{}'.format(BUCKET_NAME, key))
 
+        gg_client.publish(topic=iot_core_topic, payload=json.dumps({'message': 'Image sent to S3: {}/{}'.format(BUCKET_NAME, key)}))
+        
         return key
         
     except Exception as e:
@@ -223,10 +232,11 @@ while True:
 
     sense.set_pixels(eval(predicted_result[0][1]))
 
-    # Copy image file to s3 with classification and confidence value
-    folder = str("smart-recycle-kit/2020/known/") + str(predicted_result[0][1])
-    classified = str(predicted_result[0][1]) + "-" + str(predicted_result[0][0])
-    push_to_s3(image_filename, folder, classified)
+    if (BUCKET_NAME != ""):
+        # Copy image file to s3 with classification and confidence value
+        folder = str("smart-recycle-kit/2020/known/") + str(predicted_result[0][1])
+        classified = str(predicted_result[0][1]) + "-" + str(predicted_result[0][0])
+        push_to_s3(image_filename, folder, classified)
 
     time.sleep(2)
 
