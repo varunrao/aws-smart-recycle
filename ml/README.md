@@ -54,7 +54,7 @@ This recipe provides a dataset of images labeled under the categories of recycli
 
 This recipe uses Amazon SageMaker Jupyter notebooks as the development environment to train your models. Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations, and narrative text. A full Jupyter notebook has been prepared for you to follow along.
 
-First, download the example notebook: [aws-smart-recycle-kit-ml-model.ipynb](notebook/aws-smart-recycle-kit-ml-model.ipynb) 
+First, download the example notebook: [aws-smart-recycle-kit-ml-model.ipynb](https://reinvent2018-recycle-arm-us-east-1.s3.amazonaws.com/2020/ml-models/aws-smart-recycle-kit-ml-model.ipynb) 
 
 Then to create a custom image classification model, you need to use a graphics processing unit (GPU) enabled training job instance. GPUs are excellent at parallelizing the computations required to train a neural network. This tutorial uses a single ml.p2.xlarge instance. In order to access a GPU-enabled training job instance, you must submit a request for a service limit increase to the AWS Support Center as explained in the Setup section of the guide. 
 
@@ -80,7 +80,7 @@ You should see the page below
 
 ![sagemaker notebook](images/notebookupload.jpg)
 
-Now upload the [aws-smart-recycle-kit-ml-model.ipynb](notebook/aws-smart-recycle-kit-ml-model.ipynb) file you downloaded earlier.
+Now upload the [aws-smart-recycle-kit-ml-model.ipynb](https://reinvent2018-recycle-arm-us-east-1.s3.amazonaws.com/2020/ml-models/aws-smart-recycle-kit-ml-model.ipynb) file you downloaded earlier.
 
 Once the notebook has uploaded, click on its name to open it.
 
