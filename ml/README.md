@@ -97,6 +97,6 @@ After you follow the notebook through to the end, you have a trained model to di
 After executing the last cell, there will be two lines, like the sample output below, that can be used in the Lambda function that will be created.  Copy your output and paste it into a text editor for the later step.  
 
 ```bash
-ML_BUCKET_NAME =  "sagemaker-us-east-1-account_number"
+ML_BUCKET_NAME =  "sagemaker-us-east-1-0123456789"
 ML_OBJECT_NAME =  "smart-recycle-kit/output/ic-trash-2020-11-28-15-42-58-796/output/model.tar.gz"
 ```
