@@ -94,4 +94,9 @@ After you follow the notebook through to the end, you have a trained model to di
 
 ## Using your model with the Smart Recycle Kit 
 
-In the last cell there will be two lines that can be copied into the Lambda function to use the model you have created on the Raspberry Pi.
+After executing the last cell, there will be two lines, like the sample output below, that can be used in the Lambda function that is created later.  Copy this output and save in a text editor for later.  
+
+```bash
+ML_BUCKET_NAME =  "sagemaker-us-east-1-account_number"
+ML_OBJECT_NAME =  "smart-recycle-kit/output/ic-trash-2020-11-28-15-42-58-796/output/model.tar.gz"
+```
