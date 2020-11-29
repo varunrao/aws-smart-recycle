@@ -94,7 +94,7 @@ After you follow the notebook through to the end, you have a trained model to di
 
 ## Using your model with the Smart Recycle Kit 
 
-After executing the last cell, there will be two lines, like the sample output below, that can be used in the Lambda function that is created later.  Copy this output and save in a text editor for later.  
+After executing the last cell, there will be two lines, like the sample output below, that can be used in the Lambda function that will be created.  Copy your output and paste it into a text editor for the later step.  
 
 ```bash
 ML_BUCKET_NAME =  "sagemaker-us-east-1-account_number"
