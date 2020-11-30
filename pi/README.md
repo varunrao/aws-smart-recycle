@@ -655,10 +655,16 @@ In the previous steps, you downloaded two files to your computer:
 
     ![40-4-gg-lambda-alias-ex](images/40-4-gg-lambda-alias-ex.png)
 
-1. 
+1. Click the **...** on the upper right corner of the Lambda function that was just added.
 
     ![40-5-gg-lambda-home](images/40-5-gg-lambda-home.png)
+
+1. Select **Edit configuration**.
+
     ![40-6-gg-lambda-home-edit](images/40-6-gg-lambda-home-edit.png)
+
+1. There are some specific Lambda configuration updates that need to be made.  
+
     ![40-7-gg-lambda-edit](images/40-7-gg-lambda-edit.png)
     ![40-8-gg-lambda-edit-root](images/40-8-gg-lambda-edit-root.png)
     ![40-9-gg-lambda-edit-root-update](images/40-9-gg-lambda-edit-root-update.png)
