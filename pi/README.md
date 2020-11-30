@@ -592,7 +592,7 @@ In the previous steps, you downloaded two files to your computer:
 
 
 
-## Create Lambda function and deploy to Greengrass Core
+## Create Lambda function
 
 1. Open an AWS Console to [Lambda](https://console.aws.amazon.com/lambda/home) and Click in the upper right corner on **Create function**.
 
@@ -621,14 +621,30 @@ In the previous steps, you downloaded two files to your computer:
 1. Press **Publish** to publish a version of the Lambda function.    
     ![lambda-publish-ex-image](images/30-8-lambda-pub-ex.png)
 
-1. Test     
-
+1. Press **Actions** again, and this time select **Create alias**.   
 
     ![30-9-lambda-alias](images/30-9-lambda-alias.png)
+
+1. Enter a **Name** for the alias.  We chose `ggc` since this will piont to the version of the Lambda function that is uploaded to the Greengrass core.  Then after entering a name, press **Save**.
+
     ![30-10-lambda-alias-ex](images/30-10-lambda-alias-ex.png)
+
+## Add Lambda function to Greengrass group
+
+1. Open [IoT Core](https://https://console.aws.amazon.com/iot/home) on your computer and navigate to the Greengrass group you created earlier, then select **Lambdas** in the menu on the left.
+
     ![40-0-gg-group](images/40-0-gg-group.png)
+
+1. Now to add the Lambda function to the Greengrass group, Select **Add your first Lambda**.
+
     ![40-1-gg-lambda](images/40-1-gg-lambda.png)
+
+1. 
+
+    ![40-2-0-gg-lambda](images/40-2-0-gg-lambda.png)
+
     ![40-2-gg-lambda-select](images/40-2-gg-lambda-select.png)
+
     ![40-3-gg-lambda-select-ex](images/40-3-gg-lambda-select-ex.png)
     ![40-4-gg-lambda-alias-ex](images/40-4-gg-lambda-alias-ex.png)
     ![40-5-gg-lambda-home](images/40-5-gg-lambda-home.png)
