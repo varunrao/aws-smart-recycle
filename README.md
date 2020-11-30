@@ -1,5 +1,6 @@
 # Smart Recycle Kit
 
+![overview-image](pi/images/Recycle_2020BF.png)
 
 ## Components needed to build Smart Recycle Kit
 [Amazon Shopping List](https://www.amazon.com/hz/wishlist/ls/23FOJ731YT9VW?ref_=wl_share) created with items below. 
