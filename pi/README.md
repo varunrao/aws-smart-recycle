@@ -697,7 +697,6 @@ In the previous steps, you downloaded two files to your computer:
 
     ![40-23-GG-role-next](images/40-23-GG-role-next.png)
 
-
 1. Scroll down and Press **Edit** next to `Stream manager`. 
 
     ![40-12-gg-settings-stream](images/40-12-gg-settings-stream.png)
@@ -738,12 +737,53 @@ In the previous steps, you downloaded two files to your computer:
 
     ![40-20-gg-settings-local-en-level](images/40-20-gg-settings-local-en-level.png)
 
+1. Select **Subscriptions** in the menu on the left, then Press **Add your first Subscription**.
+
     ![41-1-subscriptions](images/41-1-subscriptions.png)
-    ![41-2-source-target](images/41-2-source-target.png)
+
+1. Click **Select** on a `Select a Source` 
+
+    ![41-2-0-source-target](images/41-2-0-source-target.png)
+
+1. Select **Lambdas** and the Lambda function, `gg-pi-recycle`. Click **Select** on a `Select a Target`. 
+
+    ![41-2-1-source-target](images/41-2-1-source-target.png)
+
+1. Select **Services** and `IoT Cloud`. Then press **Next**. 
+
+    ![41-2-2-source-target](images/41-2-2-source-target.png)
+
+1. Select the `Topic Filter` and enter `recycle/info`.  Press **Next**.
+
     ![41-3-topic](images/41-3-topic.png)
+
+1. Press **Finish**.
+
     ![41-4-finish](images/41-4-finish.png)
+
+## Deploy to Greengrass Core
+
+1. Select **Deployments** in the left menu, then press **Actions**.
+
     ![42-1-actions](images/42-1-actions.png)
+
+1. Select **Deploy** from the **Actions** menu.
+
     ![42-2-deploy](images/42-2-deploy.png)
+
+1. Press **Automatic detection**.
+
     ![42-3-discover](images/42-3-discover.png)
+
+1. `Building deployment` and `Deployment in progress` will show an orage status icon, until the deployment has completed.
+
     ![42-4-progress](images/42-4-progress.png)
+
+1. When the Deployment is completed and successful, there will be a green status icon and a `Successfully completed` message.
+
     ![42-5-success](images/42-5-success.png)
+
+
+# Congratulations you have finished the Recycle Kit build and deployment process.
+
+You can now test your model by pressing the joystick on the SenseHAT once you see an orange question mark on the SenseHAT lights.
