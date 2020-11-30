@@ -677,7 +677,7 @@ In the previous steps, you downloaded two files to your computer:
 
 ## Update Greengrass group settings
 
-1. Navigate back to your Greengrass group by selecting the link at the top of the screen as shown in the image below.
+1. Navigate back to your Greengrass group by selecting the group id link at the top of the screen as shown in the image below.
 
     ![40-10-gg-lambda-updated](images/40-10-gg-lambda-updated.png)
 
