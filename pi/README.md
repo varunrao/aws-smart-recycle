@@ -498,17 +498,21 @@ In the previous steps, you downloaded two files to your computer:
     ```
 
 
-## Create IAM Policy and Role for the GreenGrass Group
+## Create IAM Policy and Role for the Greengrass Group
 
-1. Open an AWS Console to [IAM](https://console.aws.amazon.com/iam/home) and Click in the upper right corner on **Create function**.
-
+1. Open an AWS Console to [IAM](https://console.aws.amazon.com/iam/home) and Click on **Policies** in the left side menu.
 
    ![iam-policy-home-image](images/25-0-iam-policies.png)
 
+1. Press the **Create policy** button at the top of the screen.
 
    ![iam-policy-image](images/25-1-create-policy.png)
 
+1. Select the **JSON** tab.
+
    ![iam-policy-json-image](images/25-2-json.png)
+
+1. Copy the below JSON document, and paste into the visual editor, replacing the existing policy.  Press  **Review policy** in the bottom right of the page.
 
 ```json
 {
@@ -560,11 +564,15 @@ In the previous steps, you downloaded two files to your computer:
 
    ![iam-policy-json-paste-image](images/25-3-json-paste-review.png)
 
+1. Give the policy a name, in the example below we have used **RecycleKitPolicy**.  Press **Create policy**.
 
    ![iam-policy-name-image](images/25-4-policy-name-create.png)
 
+1. Press **Roles** in the menu on the right, then press **Create role**.
+
    ![iam-role-create-image](images/26-1-role-create.png)
 
+1. Select **Greengrass** 
    ![iam-role-gg-image](images/26-2-1-gg-role.png)
 
    ![iam-role-policy-select-image](images/26-2-policy-select.png)
@@ -603,7 +611,7 @@ In the previous steps, you downloaded two files to your computer:
 
     ![lambda-s3-ex-image](images/30-5-lambda-s3-paste.png)
 
-1. This zip file has a deployment package of a Lambda function and a folder that contains the GreenGrass SDK.  Press **Actions**.
+1. This zip file has a deployment package of a Lambda function and a folder that contains the Greengrass SDK.  Press **Actions**.
 
     ![lambda-upload-after-image](images/30-6-lambda-upload-after.png)
 
