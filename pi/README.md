@@ -500,7 +500,7 @@ In the previous steps, you downloaded two files to your computer:
 
 ## Create IAM Policy and Role for the GreenGrass Group
 
-1. https://console.aws.amazon.com/iam/home?region=us-east-1#/home
+1. Open an AWS Console to [IAM](https://console.aws.amazon.com/iam/home) and Click in the upper right corner on **Create function**.
 
 
    ![iam-policy-home-image](images/25-0-iam-policies.png)
@@ -587,7 +587,7 @@ In the previous steps, you downloaded two files to your computer:
 
 ## Create Lambda function and deploy to Greengrass Core
 
-1. Open an AWS Console to [Lambda](https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions) and Click in the upper right corner on **Create function**.
+1. Open an AWS Console to [Lambda](https://console.aws.amazon.com/lambda/home) and Click in the upper right corner on **Create function**.
 
     ![lambda-image](images/30-0-lambda.png)
 
