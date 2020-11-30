@@ -572,24 +572,25 @@ In the previous steps, you downloaded two files to your computer:
 
    ![iam-role-create-image](images/26-1-role-create.png)
 
-1. Select **Greengrass** 
+1. Select **Greengrass**, and press **Next: Permissions**.
+
    ![iam-role-gg-image](images/26-2-1-gg-role.png)
+
+1. On the Attach permissions policies, filter the policy list down by typing the name of the policy created in the previous step. Our policy was given the name **RecycleKitPolicy**.  So as we start typing this into the search field, the policy is filtered.  Then select the radio button next to the Policy name.
 
    ![iam-role-policy-select-image](images/26-2-policy-select.png)
 
+1. After you select the policy, it should look like the image below, then press **Next:Tags**.
+
    ![iam-role-select-next-image](images/26-3-selected-next.png)
+
+1. Press **Next: Review**
 
    ![iam-role-tag-next-image](images/26-4-tag-next.png)
 
+1. Enter a name for the Role created, we have selected to use `RecycleKitGGGroupRole`, since the role will be assigned to the Greengrass group for the Recycle Kit.  Press **Create role** to finish the creation process.
+
    ![iam-role-create-final-image](images/26-5-role-create-final.png)
-
-
-
-
-
-
-
-
 
 
 
