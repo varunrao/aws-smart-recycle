@@ -591,7 +591,7 @@ In the previous steps, you downloaded two files to your computer:
 
     ![lambda-image](images/30-0-lambda.png)
 
-1.  Fill in the **Function name** and select the **Runtime** as shown below, anclick **Create function** at the bottom right of the page.
+1.  Fill in the **Function name** of `gg-pi-recycle` and select the **Runtime** of `Python 3.7` as shown below. Press **Create function** at the bottom right of the page.
 
     ![lambda-create-ex-image](images/30-2-lambda-create-ex.png)
 
