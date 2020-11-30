@@ -497,34 +497,18 @@ In the previous steps, you downloaded two files to your computer:
     sudo pip3 install boto3
     ```
 
-## Create Lambda function and deploy to Greengrass Core
-
-1. https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions
-
-    ![lambda-image](images/30-0-lambda.png)
-
-    ![lambda-create-image](images/30-1-lambda-create.png)
-
-    ![lambda-create-ex-image](images/30-2-lambda-create-ex.png)
-
-    ![lambda-upload-image](images/30-3-lambda-upload.png)
-
-    ![lambda-s3-image](images/30-4-lambda-s3.png)
-
-    ![lambda-s3-ex-image](images/30-5-lambda-s3-ex.png)
-
-    ![lambda-upload-after-image](images/30-6-lambda-upload-after.png)
-
-    ![lambda-publish-image](images/30-7-lambda-publish.png)
-
-    ![lambda-publish-ex-image](images/30-8-lambda-publish-ex.png)
-
-
-
 
 ## Create IAM Policy and Role for the GreenGrass Group
 
 1. https://console.aws.amazon.com/iam/home?region=us-east-1#/home
+
+
+   ![iam-policy-home-image](images/25-0-iam-policies.png)
+
+
+   ![iam-policy-image](images/25-1-create-policy.png)
+
+   ![iam-policy-json-image](images/25-2-json.png)
 
 ```json
 {
@@ -573,6 +557,65 @@ In the previous steps, you downloaded two files to your computer:
     ]
 }
 ```
+
+   ![iam-policy-json-paste-image](images/25-3-json-paste-review.png)
+
+
+   ![iam-policy-name-image](images/25-4-policy-name-create.png)
+
+   ![iam-role-create-image](images/26-1-role-create.png)
+
+   ![iam-role-gg-image](images/26-2-1-gg-role.png)
+
+   ![iam-role-policy-select-image](images/26-2-policy-select.png)
+
+   ![iam-role-select-next-image](images/26-3-selected-next.png)
+
+   ![iam-role-tag-next-image](images/26-4-tag-next.png)
+
+   ![iam-role-create-final-image](images/26-5-role-create-final.png)
+
+
+
+
+
+
+
+
+
+
+
+## Create Lambda function and deploy to Greengrass Core
+
+1. Open an AWS Console to [Lambda](https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions) and Click in the upper right corner on **Create function**.
+
+    ![lambda-image](images/30-0-lambda.png)
+
+1.  Fill in the **Function name** and select the **Runtime** as shown below, anclick **Create function** at the bottom right of the page.
+
+    ![lambda-create-ex-image](images/30-2-lambda-create-ex.png)
+
+1. Click on **Actions**, then **Upload a file from Amazon S3**.
+
+    ![lambda-upload-image](images/30-3-lambda-upload.png)
+
+1. Enter `https://reinvent2018-recycle-arm-us-east-1.s3.amazonaws.com/2020/lambda/gg-pi-recycle.zip` into the input field and press **Save**.
+
+    ![lambda-s3-ex-image](images/30-5-lambda-s3-ex.png)
+
+1. This zip file has a deployment package of a Lambda function and a folder that contains the GreenGrass SDK.  Press **Actions**.
+
+    ![lambda-upload-after-image](images/30-6-lambda-upload-after.png)
+
+1. Once **Actions** is pressed this will show a menu, press **Publish new version**.
+
+    ![lambda-publish-image](images/30-7-lambda-publish.png)
+
+1. Press **Publish** to publish a version of the Lambda function.    
+    ![lambda-publish-ex-image](images/30-8-lambda-publish-ex.png)
+
+1.     
+
 
 
 
