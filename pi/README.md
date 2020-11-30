@@ -499,7 +499,7 @@ In the previous steps, you downloaded two files to your computer:
 
 ## Create Lambda function and deploy to Greengrass Core
 
-1. 
+1. https://console.aws.amazon.com/lambda/home?region=us-east-1#/functions
 
     ![lambda-image](images/30-0-lambda.png)
 
