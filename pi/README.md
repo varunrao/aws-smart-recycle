@@ -639,7 +639,7 @@ In the previous steps, you downloaded two files to your computer:
 
     ![40-1-gg-lambda](images/40-1-gg-lambda.png)
 
-1. 
+1. test
 
     ![40-2-0-gg-lambda](images/40-2-0-gg-lambda.png)
 
