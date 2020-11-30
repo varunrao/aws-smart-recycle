@@ -663,12 +663,25 @@ In the previous steps, you downloaded two files to your computer:
 
     ![40-6-gg-lambda-home-edit](images/40-6-gg-lambda-home-edit.png)
 
-1. There are some specific Lambda configuration updates that need to be made.  
+1. There are some Greengrass group specific Lambda configuration updates that need to be made.  Since the Lambda function needs to interact directly with the SenseHAT, it needs to run as root and not in a container.  We updated the config.json on the Raspberry Pi earlier to allow Greengrass functions to run as root, which is not allowed by default.  Select the radio buttons next to **Another user ID/group ID**, **No container**, and **Make this function long-lived and keep it running indefinitely**.
 
     ![40-7-gg-lambda-edit](images/40-7-gg-lambda-edit.png)
+
+1. After the radio buttons have been selected, enter the UID of `0` and GID of `0`.  Also change the timeout value to 30 seconds.
+
     ![40-8-gg-lambda-edit-root](images/40-8-gg-lambda-edit-root.png)
+
+1. After updating those parameters, Press **Update**.
+
     ![40-9-gg-lambda-edit-root-update](images/40-9-gg-lambda-edit-root-update.png)
+
+## Update Greengrass group settings
+
+1. Navigate back to your Greengrass group by selecting the link at the top of the screen as shown in the image below.
+
     ![40-10-gg-lambda-updated](images/40-10-gg-lambda-updated.png)
+
+
     ![40-11-gg-settings](images/40-11-gg-settings.png)
     ![40-12-gg-settings-stream](images/40-12-gg-settings-stream.png)
     ![40-13-gg-settings-stream-edit](images/40-13-gg-settings-stream-edit.png)
