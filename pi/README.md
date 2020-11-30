@@ -561,7 +561,6 @@ In the previous steps, you downloaded two files to your computer:
 }
 ```
 ![iam-policy-json-paste-image](images/25-3-json-paste-review.png)
-
 1. Give the policy a name, in the example below we have used **RecycleKitPolicy**.  Press **Create policy**.
 
    ![iam-policy-name-image](images/25-4-policy-name-create.png)
