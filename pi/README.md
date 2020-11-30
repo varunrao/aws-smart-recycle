@@ -681,15 +681,30 @@ In the previous steps, you downloaded two files to your computer:
 
     ![40-10-gg-lambda-updated](images/40-10-gg-lambda-updated.png)
 
+1. Select **Settings** in the left menu.
 
     ![40-11-gg-settings](images/40-11-gg-settings.png)
+
+1. Scroll down and Press **Edit** next to `Stream manager`. 
+
     ![40-12-gg-settings-stream](images/40-12-gg-settings-stream.png)
+
+1. Select the radio button next to `Disable` and press **Save**.
+
     ![40-13-gg-settings-stream-edit](images/40-13-gg-settings-stream-edit.png)
+
+1. Select **Edit** next to `CloudWatch logs configuration`.
+
     ![40-14-gg-settings-cw](images/40-14-gg-settings-cw.png)
-    ![40-14-gg-settings-local](images/40-14-gg-settings-local.png)
+
+
     ![40-15-gg-settings-cw-add](images/40-15-gg-settings-cw-add.png)
     ![40-16-gg-settings-cw-en](images/40-16-gg-settings-cw-en.png)
     ![40-17-gg-settings-cw-en-level](images/40-17-gg-settings-cw-en-level.png)
+
+
+    ![40-14-gg-settings-local](images/40-14-gg-settings-local.png)
+
     ![40-18-gg-settings-local-add](images/40-18-gg-settings-local-add.png)
     ![40-19-gg-settings-local-en](images/40-19-gg-settings-local-en.png)
     ![40-20-gg-settings-local-en-level](images/40-20-gg-settings-local-en-level.png)
