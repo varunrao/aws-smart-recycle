@@ -601,7 +601,7 @@ In the previous steps, you downloaded two files to your computer:
 
 1. Enter `https://reinvent2018-recycle-arm-us-east-1.s3.amazonaws.com/2020/lambda/gg-pi-recycle.zip` into the input field and press **Save**.
 
-    ![lambda-s3-ex-image](images/30-5-lambda-s3-ex.png)
+    ![lambda-s3-ex-image](images/30-5-lambda-s3-paste.png)
 
 1. This zip file has a deployment package of a Lambda function and a folder that contains the GreenGrass SDK.  Press **Actions**.
 
@@ -612,7 +612,7 @@ In the previous steps, you downloaded two files to your computer:
     ![lambda-publish-image](images/30-7-lambda-publish.png)
 
 1. Press **Publish** to publish a version of the Lambda function.    
-    ![lambda-publish-ex-image](images/30-8-lambda-publish-ex.png)
+    ![lambda-publish-ex-image](images/30-8-lambda-pub-ex.png)
 
 1.     
 
