@@ -1,4 +1,4 @@
-# Create your own Smart Recycle Kit
+# Smart Recycle Kit
 
 
 ## Components needed to build Smart Recycle Kit
