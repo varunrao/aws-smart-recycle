@@ -513,54 +513,55 @@ In the previous steps, you downloaded two files to your computer:
    ![iam-policy-json-image](images/25-2-json.png)
 
 1. Copy the below JSON document, and paste into the visual editor, replacing the existing policy.  Press  **Review policy** in the bottom right of the page.
-```json
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "GreenGrassIoTAccess",
-            "Effect": "Allow",
-            "Action": [
-                "iot:Connect",
-                "iot:Publish",
-                "iot:Subscribe",
-                "iot:Receive",
-                "iot:GetThingShadow",
-                "iot:UpdateThingShadow",
-                "iot:DeleteThingShadow"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Sid": "GreenGrassS3ObjectAccess",
-            "Effect": "Allow",
-            "Action": [
-                "s3:ListBucket",
-                "s3:GetObject",
-                "s3:PutObject"
-            ],
-            "Resource": [
-                "arn:aws:s3:::sagemaker*/smart-recycle-kit/*",
-                "arn:aws:s3:::sagemaker*",
-                "arn:aws:s3:::reinvent2018-recycle-arm-us-east-1/*",
-                "arn:aws:s3:::reinvent2018-recycle-arm-us-east-1"
-            ]
-        },
-        {
-            "Sid": "GreenGrassCloudWatchAccess",
-            "Effect": "Allow",
-            "Action": [
-                "logs:CreateLogStream",
-                "logs:DescribeLogStreams",
-                "logs:PutLogEvents",
-                "logs:CreateLogGroup"
-            ],
-            "Resource": "arn:aws:logs:*:*:log-group:/aws/greengrass/*"
-        }
-    ]
-}
-```
-![iam-policy-json-paste-image](images/25-3-json-paste-review.png)
+    ```json
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "GreenGrassIoTAccess",
+                "Effect": "Allow",
+                "Action": [
+                    "iot:Connect",
+                    "iot:Publish",
+                    "iot:Subscribe",
+                    "iot:Receive",
+                    "iot:GetThingShadow",
+                    "iot:UpdateThingShadow",
+                    "iot:DeleteThingShadow"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Sid": "GreenGrassS3ObjectAccess",
+                "Effect": "Allow",
+                "Action": [
+                    "s3:ListBucket",
+                    "s3:GetObject",
+                    "s3:PutObject"
+                ],
+                "Resource": [
+                    "arn:aws:s3:::sagemaker*/smart-recycle-kit/*",
+                    "arn:aws:s3:::sagemaker*",
+                    "arn:aws:s3:::reinvent2018-recycle-arm-us-east-1/*",
+                    "arn:aws:s3:::reinvent2018-recycle-arm-us-east-1"
+                ]
+            },
+            {
+                "Sid": "GreenGrassCloudWatchAccess",
+                "Effect": "Allow",
+                "Action": [
+                    "logs:CreateLogStream",
+                    "logs:DescribeLogStreams",
+                    "logs:PutLogEvents",
+                    "logs:CreateLogGroup"
+                ],
+                "Resource": "arn:aws:logs:*:*:log-group:/aws/greengrass/*"
+            }
+        ]
+    }
+    ```
+    ![iam-policy-json-paste-image](images/25-3-json-paste-review.png)
+    
 1. Give the policy a name, in the example below we have used **RecycleKitPolicy**.  Press **Create policy**.
 
    ![iam-policy-name-image](images/25-4-policy-name-create.png)
