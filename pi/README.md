@@ -501,9 +501,78 @@ In the previous steps, you downloaded two files to your computer:
 
 1. 
 
+    ![lambda-image](images/30-0-lambda.png)
+
+    ![lambda-create-image](images/30-1-lambda-create.png)
+
+    ![lambda-create-ex-image](images/30-2-lambda-create-ex.png)
+
+    ![lambda-upload-image](images/30-3-lambda-upload.png)
+
+    ![lambda-s3-image](images/30-4-lambda-s3.png)
+
+    ![lambda-s3-ex-image](images/30-5-lambda-s3-ex.png)
+
+    ![lambda-upload-after-image](images/30-6-lambda-upload-after.png)
+
+    ![lambda-publish-image](images/30-7-lambda-publish.png)
+
+    ![lambda-publish-ex-image](images/30-8-lambda-publish-ex.png)
+
+
 
 
 ## Create IAM Policy and Role for the GreenGrass Group
 
-1. 
+1. https://console.aws.amazon.com/iam/home?region=us-east-1#/home
+
+```json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "GreenGrassIoTAccess",
+            "Effect": "Allow",
+            "Action": [
+                "iot:Connect",
+                "iot:Publish",
+                "iot:Subscribe",
+                "iot:Receive",
+                "iot:GetThingShadow",
+                "iot:UpdateThingShadow",
+                "iot:DeleteThingShadow"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "GreenGrassS3ObjectAccess",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::sagemaker*/smart-recycle-kit/*",
+                "arn:aws:s3:::sagemaker*",
+                "arn:aws:s3:::reinvent2018-recycle-arm-us-east-1/*",
+                "arn:aws:s3:::reinvent2018-recycle-arm-us-east-1"
+            ]
+        },
+        {
+            "Sid": "GreenGrassCloudWatchAccess",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:PutLogEvents",
+                "logs:CreateLogGroup"
+            ],
+            "Resource": "arn:aws:logs:*:*:log-group:/aws/greengrass/*"
+        }
+    ]
+}
+```
+
+
 

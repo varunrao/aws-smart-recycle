@@ -22,7 +22,7 @@ ML_OBJECT_NAME = "2020/ml-models/model.tar.gz"
 
 # If you have created your own ML model using the Sagemaker notebook provided, 
 # the last section will print two lines that can be pasted over the following two lines
-#ML_BUCKET_NAME =  "sagemaker-<region>-<acct_numeber>"
+#ML_BUCKET_NAME =  "sagemaker-us-east-1-0123456789"
 #ML_OBJECT_NAME =  "smart-recycle-kit/output/<model_directory>/output/model.tar.gz"
 
 # S3 Bucket Name to save images taken
