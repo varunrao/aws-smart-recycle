@@ -561,7 +561,7 @@ In the previous steps, you downloaded two files to your computer:
     }
     ```
     ![iam-policy-json-paste-image](images/25-3-json-paste-review.png)
-    
+
 1. Give the policy a name, in the example below we have used **RecycleKitPolicy**.  Press **Create policy**.
 
    ![iam-policy-name-image](images/25-4-policy-name-create.png)
@@ -589,7 +589,6 @@ In the previous steps, you downloaded two files to your computer:
 1. Enter a name for the Role created, we have selected to use `RecycleKitGGGroupRole`, since the role will be assigned to the Greengrass group for the Recycle Kit.  Press **Create role** to finish the creation process.
 
    ![iam-role-create-final-image](images/26-5-role-create-final.png)
-
 
 
 
@@ -622,8 +621,42 @@ In the previous steps, you downloaded two files to your computer:
 1. Press **Publish** to publish a version of the Lambda function.    
     ![lambda-publish-ex-image](images/30-8-lambda-pub-ex.png)
 
-1.     
+1. Test     
 
 
-
-
+    ![30-9-lambda-alias](images/30-9-lambda-alias.png)
+    ![30-10-lambda-alias-ex](images/30-10-lambda-alias-ex.png)
+    ![40-0-gg-group](images/40-0-gg-group.png)
+    ![40-1-gg-lambda](images/40-1-gg-lambda.png)
+    ![40-2-gg-lambda-select](images/40-2-gg-lambda-select.png)
+    ![40-3-gg-lambda-select-ex](images/40-3-gg-lambda-select-ex.png)
+    ![40-4-gg-lambda-alias-ex](images/40-4-gg-lambda-alias-ex.png)
+    ![40-5-gg-lambda-home](images/40-5-gg-lambda-home.png)
+    ![40-6-gg-lambda-home-edit](images/40-6-gg-lambda-home-edit.png)
+    ![40-7-gg-lambda-edit](images/40-7-gg-lambda-edit.png)
+    ![40-8-gg-lambda-edit-root](images/40-8-gg-lambda-edit-root.png)
+    ![40-9-gg-lambda-edit-root-update](images/40-9-gg-lambda-edit-root-update.png)
+    ![40-10-gg-lambda-updated](images/40-10-gg-lambda-updated.png)
+    ![40-11-gg-settings](images/40-11-gg-settings.png)
+    ![40-12-gg-settings-stream](images/40-12-gg-settings-stream.png)
+    ![40-13-gg-settings-stream-edit](images/40-13-gg-settings-stream-edit.png)
+    ![40-14-gg-settings-cw](images/40-14-gg-settings-cw.png)
+    ![40-14-gg-settings-local](images/40-14-gg-settings-local.png)
+    ![40-15-gg-settings-cw-add](images/40-15-gg-settings-cw-add.png)
+    ![40-16-gg-settings-cw-en](images/40-16-gg-settings-cw-en.png)
+    ![40-17-gg-settings-cw-en-level](images/40-17-gg-settings-cw-en-level.png)
+    ![40-18-gg-settings-local-add](images/40-18-gg-settings-local-add.png)
+    ![40-19-gg-settings-local-en](images/40-19-gg-settings-local-en.png)
+    ![40-20-gg-settings-local-en-level](images/40-20-gg-settings-local-en-level.png)
+    ![40-21-gg-settings-group](images/40-21-gg-settings-group.png)
+    ![40-22-GG-role](images/40-22-GG-role.png)
+    ![40-23-GG-role-next](images/40-23-GG-role-next.png)
+    ![41-1-subscriptions](images/41-1-subscriptions.png)
+    ![41-2-source-target](images/41-2-source-target.png)
+    ![41-3-topic](images/41-3-topic.png)
+    ![41-4-finish](images/41-4-finish.png)
+    ![42-1-actions](images/42-1-actions.png)
+    ![42-2-deploy](images/42-2-deploy.png)
+    ![42-3-discover](images/42-3-discover.png)
+    ![42-4-progress](images/42-4-progress.png)
+    ![42-5-success](images/42-5-success.png)
