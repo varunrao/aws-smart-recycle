@@ -685,6 +685,19 @@ In the previous steps, you downloaded two files to your computer:
 
     ![40-11-gg-settings](images/40-11-gg-settings.png)
 
+1. Select **Add Role** next to `Group Role`.
+
+    ![40-21-gg-settings-group](images/40-21-gg-settings-group.png)
+
+1. Select the radio button next to the IAM Role that was created for the Greengrass group, we used `RecycleKitGGGroupRole`.
+
+    ![40-22-GG-role](images/40-22-GG-role.png)
+
+1. After selecting the IAM Role, Press **Save**.
+
+    ![40-23-GG-role-next](images/40-23-GG-role-next.png)
+
+
 1. Scroll down and Press **Edit** next to `Stream manager`. 
 
     ![40-12-gg-settings-stream](images/40-12-gg-settings-stream.png)
@@ -697,20 +710,34 @@ In the previous steps, you downloaded two files to your computer:
 
     ![40-14-gg-settings-cw](images/40-14-gg-settings-cw.png)
 
+1. Select **Add another log type**.
 
     ![40-15-gg-settings-cw-add](images/40-15-gg-settings-cw-add.png)
+
+1. Select both `User Lambdas (recommended)` and `Greengrass system`, then press **Update**.
+
     ![40-16-gg-settings-cw-en](images/40-16-gg-settings-cw-en.png)
+   
+1. Then press **Save**.
+
     ![40-17-gg-settings-cw-en-level](images/40-17-gg-settings-cw-en-level.png)
 
+1.  Select **Edit** next to `Local logs configuration`, to start the ssame process we did previously, but this time for configuring logs on the local Greengrass Core.
 
     ![40-14-gg-settings-local](images/40-14-gg-settings-local.png)
 
+1. Select **Add another log type**.
+
     ![40-18-gg-settings-local-add](images/40-18-gg-settings-local-add.png)
+
+1. Select both `User Lambdas (recommended)` and `Greengrass system`, then press **Update**.
+
     ![40-19-gg-settings-local-en](images/40-19-gg-settings-local-en.png)
+
+1. Then press **Save**.
+
     ![40-20-gg-settings-local-en-level](images/40-20-gg-settings-local-en-level.png)
-    ![40-21-gg-settings-group](images/40-21-gg-settings-group.png)
-    ![40-22-GG-role](images/40-22-GG-role.png)
-    ![40-23-GG-role-next](images/40-23-GG-role-next.png)
+
     ![41-1-subscriptions](images/41-1-subscriptions.png)
     ![41-2-source-target](images/41-2-source-target.png)
     ![41-3-topic](images/41-3-topic.png)
