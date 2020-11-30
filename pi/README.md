@@ -784,6 +784,6 @@ In the previous steps, you downloaded two files to your computer:
     ![42-5-success](images/42-5-success.png)
 
 
-# Congratulations you have finished the Recycle Kit build and deployment process.
+# Congratulations you have finished the Smart Recycle Kit build and deployment process.
 
 You can now test your model by pressing the joystick on the SenseHAT once you see an orange question mark on the SenseHAT lights.
