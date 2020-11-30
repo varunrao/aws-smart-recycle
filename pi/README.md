@@ -513,7 +513,6 @@ In the previous steps, you downloaded two files to your computer:
    ![iam-policy-json-image](images/25-2-json.png)
 
 1. Copy the below JSON document, and paste into the visual editor, replacing the existing policy.  Press  **Review policy** in the bottom right of the page.
-
 ```json
 {
     "Version": "2012-10-17",
@@ -561,7 +560,7 @@ In the previous steps, you downloaded two files to your computer:
     ]
 }
 ```
-   ![iam-policy-json-paste-image](images/25-3-json-paste-review.png)
+![iam-policy-json-paste-image](images/25-3-json-paste-review.png)
 
 1. Give the policy a name, in the example below we have used **RecycleKitPolicy**.  Press **Create policy**.
 
