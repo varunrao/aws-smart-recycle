@@ -561,7 +561,6 @@ In the previous steps, you downloaded two files to your computer:
     ]
 }
 ```
-
    ![iam-policy-json-paste-image](images/25-3-json-paste-review.png)
 
 1. Give the policy a name, in the example below we have used **RecycleKitPolicy**.  Press **Create policy**.
@@ -591,6 +590,7 @@ In the previous steps, you downloaded two files to your computer:
 1. Enter a name for the Role created, we have selected to use `RecycleKitGGGroupRole`, since the role will be assigned to the Greengrass group for the Recycle Kit.  Press **Create role** to finish the creation process.
 
    ![iam-role-create-final-image](images/26-5-role-create-final.png)
+
 
 
 
