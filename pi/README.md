@@ -639,14 +639,24 @@ In the previous steps, you downloaded two files to your computer:
 
     ![40-1-gg-lambda](images/40-1-gg-lambda.png)
 
-1. test
+1. Select either **Use existing Lambda** button.
 
     ![40-2-0-gg-lambda](images/40-2-0-gg-lambda-select.png)
 
+1. Select the radio button next to the Lambda function that was created, our example was named `gg-pi-recycle`.
+
     ![40-2-gg-lambda-select](images/40-2-gg-lambda-select.png)
 
+1. After you slect the correct Lambda function, press **Next**.
+
     ![40-3-gg-lambda-select-ex](images/40-3-gg-lambda-select-ex.png)
+
+1. Select the alias name that your created, in the example below, the alias is `ggc`.  Press **Finish**.
+
     ![40-4-gg-lambda-alias-ex](images/40-4-gg-lambda-alias-ex.png)
+
+1. 
+
     ![40-5-gg-lambda-home](images/40-5-gg-lambda-home.png)
     ![40-6-gg-lambda-home-edit](images/40-6-gg-lambda-home-edit.png)
     ![40-7-gg-lambda-edit](images/40-7-gg-lambda-edit.png)
