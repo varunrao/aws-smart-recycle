@@ -641,7 +641,7 @@ In the previous steps, you downloaded two files to your computer:
 
 1. test
 
-    ![40-2-0-gg-lambda](images/40-2-0-gg-lambda.png)
+    ![40-2-0-gg-lambda](images/40-2-0-gg-lambda-select.png)
 
     ![40-2-gg-lambda-select](images/40-2-gg-lambda-select.png)
 
